@@ -48,17 +48,15 @@ function RootLayoutNav() {
 
   return (
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <Stack.Navigator initialRouteName="Welcome">
             <Stack.Screen name="Skip1" component={Skip1Screen} options={{ headerShown: false }} />
             <Stack.Screen name="Skip2" component={Skip2Screen} />
             <Stack.Screen name="Skip3" component={Skip3Screen} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
+            {/*<Stack.Screen name="Profile" component={ProfileScreen} />*/}
+            {/*<Stack.Screen name="Profile" component={ProfileScreen} />*/}
           </Stack.Navigator>
-        </NavigationContainer>
       </ThemeProvider>
   );
 }

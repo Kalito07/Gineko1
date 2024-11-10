@@ -1,4 +1,3 @@
-// navigationTypes.ts
 export type RootStackParamList = {
     Skip1: undefined;
     Skip2: undefined;

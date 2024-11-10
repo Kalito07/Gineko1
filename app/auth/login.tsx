@@ -15,7 +15,7 @@ const LoginScreen = () => {
         // Примерна логика за логин
         if (email && password) {
             console.log('Логнат е потребителят');
-            navigation.navigate('TerminsScreen'); // Пренасочване към TermsScreen
+            // navigation.navigate('TerminsScreen'); // Пренасочване към TermsScreen
         } else {
             console.log('Моля, въведете валидни данни');
         }

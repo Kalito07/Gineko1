@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from './../../lib/navigationTypes'; // Импортиране на параметрите
 
 const LoginScreen = () => {
@@ -15,8 +15,7 @@ const LoginScreen = () => {
         // Примерна логика за логин
         if (email && password) {
             console.log('Логнат е потребителят');
-            // Навигиране към следващия екран
-            navigation.navigate('Profile'); // Тук може да бъде всякакъв следващ екран
+            navigation.navigate('TerminsScreen'); // Пренасочване към TermsScreen
         } else {
             console.log('Моля, въведете валидни данни');
         }

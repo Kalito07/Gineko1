@@ -1,23 +1,19 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {DarkTheme, DefaultTheme, NavigationContainer, ThemeProvider} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Skip1Screen from "@/app/skips/skip1";
+import Skip2Screen from "@/app/skips/skip2";
 import { useColorScheme } from '@/components/useColorScheme';
+import Skip3Screen from "@/app/skips/skip3";
+import LoginScreen from "@/app/auth/login";
+import {RootStackParamList} from "@/lib/navigationTypes";
+import RegisterScreen from "@/app/auth/register";
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
-
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
-
+const Stack = createNativeStackNavigator();
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -27,7 +23,9 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+  const Stack = createNativeStackNavigator<RootStackParamList>();
+
+
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -49,11 +47,17 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack.Navigator initialRouteName="Welcome">
+            <Stack.Screen name="Skip1" component={Skip1Screen} options={{ headerShown: false }} />
+            <Stack.Screen name="Skip2" component={Skip2Screen} />
+            <Stack.Screen name="Skip3" component={Skip3Screen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ThemeProvider>
   );
 }

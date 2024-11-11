@@ -1,3 +1,4 @@
+
 export type RootStackParamList = {
     Skip1: undefined;
     Skip2: undefined;
@@ -11,4 +12,3 @@ export type RootStackParamList = {
     UnPregnant: undefined;
     Termin: undefined;
 };
-

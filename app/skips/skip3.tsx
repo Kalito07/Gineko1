@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import {RootStackParamList} from "@/lib/navigationTypes";
-// Adjust import path if you’re using a separate types file
 
 const Skip3Screen = () => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();

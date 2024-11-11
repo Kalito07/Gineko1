@@ -3,7 +3,6 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from "@/lib/navigationTypes";
 
-// Welcome screen components
 const WelcomeImage = () => (
     <View style={styles.centerContent}>
       <Image
@@ -44,9 +43,7 @@ const NavigationButtons = () => {
         </View>
   );
 };
-
-// Main Welcome Screen component
-const WelcomeScreen = () => {
+const Skip1Screen = () => {
   return (
       <View style={styles.container}>
         <WelcomeImage />
@@ -57,9 +54,8 @@ const WelcomeScreen = () => {
   );
 };
 
-export default WelcomeScreen;
+export default Skip1Screen;
 
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

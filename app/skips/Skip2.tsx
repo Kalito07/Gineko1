@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from './../../lib/navigationTypes'; // Adjust the path if necessary
+import { RootStackParamList } from '@/lib/navigationTypes';
 import { useNavigation } from '@react-navigation/native';
 
 type Skip2ScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Skip2'>;

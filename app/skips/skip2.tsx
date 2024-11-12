@@ -1,21 +1,20 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '@/lib/navigationTypes';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from "@/lib/navigationTypes";
+import { SkipImage } from "@/components/skips/SkipImage";
+import { SkipText } from "@/components/skips/SkipText";
+import translations from './../../translations.json';
+import { SkipButton } from "@/components/skips/SkipButton";
+import SkipLayout from "@/layouts/SkipLayout";
 
-type Skip2ScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Skip2'>;
-
-export default function Skip2Screen() {
-    const navigation = useNavigation<Skip2ScreenNavigationProp>();
-
+const Skip2Screen = ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) => {
     return (
-        <View>
-            <Text>Втори екран</Text>
-            <Button
-                title="Към Третия Екран"
-                onPress={() => navigation.navigate('Skip3')}
-            />
-        </View>
+        <SkipLayout>
+            <SkipImage source={require('@/assets/images/skip2.jpg')} alt="Illustration of a woman with headphones working on a laptop"/>
+            <SkipText text={translations.skips.skip2Text} />
+            <SkipButton navigation={navigation} targetScreen="skip3" />
+        </SkipLayout>
     );
-}
+};
+
+export default Skip2Screen;

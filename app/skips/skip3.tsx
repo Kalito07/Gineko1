@@ -1,41 +1,20 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import {RootStackParamList} from "@/lib/navigationTypes";
+import { NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from "@/lib/navigationTypes";
+import { SkipImage } from "@/components/skips/SkipImage";
+import { SkipText } from "@/components/skips/SkipText";
+import translations from './../../translations.json';
+import { SkipButton } from "@/components/skips/SkipButton";
+import SkipLayout from "@/layouts/SkipLayout";
 
-const Skip3Screen = () => {
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-
+const Skip3Screen = ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Трети екран</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.buttonText}>Отиди към Вход</Text>
-            </TouchableOpacity>
-        </View>
+        <SkipLayout>
+            <SkipImage source={require('@/assets/images/skip3.jpg')} alt="Illustration of a woman with headphones working on a laptop"/>
+            <SkipText text={translations.skips.skip3Text} />
+            <SkipButton navigation={navigation} targetScreen="login" />
+        </SkipLayout>
     );
 };
 
 export default Skip3Screen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    button: {
-        marginTop: 20,
-        padding: 10,
-        backgroundColor: '#007AFF',
-        borderRadius: 5,
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 16,
-    },
-});

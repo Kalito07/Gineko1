@@ -3,17 +3,14 @@ import { View, Text, TextInput, Button } from 'react-native';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from "@/lib/navigationTypes"; // Импортиране на навигацията
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-    // Функция за обработка на регистрацията
     const handleRegister = () => {
         if (email && password) {
             console.log('Регистриран е нов потребител');
-            // След успешната регистрация, навигиране към LoginScreen
-            navigation.navigate('Login');
+            navigation.navigate('register');
         } else {
             console.log('Моля, попълнете всички полета');
         }

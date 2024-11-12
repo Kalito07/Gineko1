@@ -4,4 +4,10 @@ export type RootStackParamList = {
     skip3: any;
     login: any;
     register: any;
+    termin:any;
+    termins:any;
+    unpreagnant:any;
+    pregnant:any;
+    patientType:any;
+    profile:any;
 };

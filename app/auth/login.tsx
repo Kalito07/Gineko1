@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from './../../lib/navigationTypes'; // Импортиране на параметрите
+import { RootStackParamList } from './../../lib/navigationTypes';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    // Използване на типизираната навигация
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-
-    // Функция за обработка на логин
     const handleLogin = () => {
-        // Примерна логика за логин
         if (email && password) {
             console.log('Логнат е потребителят');
             // navigation.navigate('TerminsScreen'); // Пренасочване към TermsScreen
@@ -23,7 +18,7 @@ const LoginScreen = () => {
 
     // Примерна логика за навигация към регистрация
     const handleRegisterNavigation = () => {
-        navigation.navigate('Register');
+
     };
 
     return (
@@ -41,7 +36,7 @@ const LoginScreen = () => {
                 onChangeText={setPassword}
             />
             <Button title="Логин" onPress={handleLogin} />
-            <Button title="Нямате акаунт? Регистрирайте се" onPress={handleRegisterNavigation} />
+            <Button title="Нямате акаунт? Регистрирайте се" onPress={()=>navigation.navigate('register')} />
         </View>
     );
 };

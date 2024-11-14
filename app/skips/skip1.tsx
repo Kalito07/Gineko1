@@ -7,7 +7,7 @@ import translations from './../../translations.json';
 import { SkipButton } from "@/components/skips/SkipButton";
 import SkipLayout from "@/layouts/SkipLayout";
 
-const Skip1Screen = ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) => {
+export default function Skip1Screen ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     return (
         <SkipLayout>
             <SkipImage source={require('@/assets/images/skip1.jpg')} alt="Illustration of a woman with headphones working on a laptop"/>
@@ -16,5 +16,3 @@ const Skip1Screen = ({ navigation }: { navigation: NavigationProp<RootStackParam
         </SkipLayout>
     );
 };
-
-export default Skip1Screen;

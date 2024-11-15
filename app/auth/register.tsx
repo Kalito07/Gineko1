@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from "@/lib/navigationTypes";
 import Logo from "@/components/auth/Logo";
@@ -9,6 +9,7 @@ import SubmitButton from "@/components/auth/SubmitButton";
 import SocialButtonsContainer from "@/components/auth/SocialButtonsContainer";
 import AuthTitle from "@/components/auth/AuthTitle";
 import Or from "@/components/auth/Or";
+import AuthLayout from "@/layouts/_authLayout";
 
 export default function RegisterScreen ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [email, setEmail] = useState('');
@@ -16,50 +17,27 @@ export default function RegisterScreen ({ navigation }: { navigation: Navigation
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const handleRegister = () => {
-        if (email && password && password === confirmPassword) {
-            console.log('New user registered');
-            navigation.navigate('register');
-        } else {
-            console.log('Please fill in all fields correctly');
-        }
+        // if (email && password && password === confirmPassword) {
+        //     console.log('New user registered');
+        //     navigation.navigate('register');
+        // } else {
+        //     console.log('Please fill in all fields correctly');
+        // }
+        navigation.navigate('termins');
     };
 
     return (
-        <View style={styles.container}>
+        <AuthLayout>
             <Logo />
             <AuthTitle test={translations.auth.registerTitle}/>
-            <View style={styles.inputContainer}>
-                <InputField placeholder={translations.auth.email} value={email} onChangeText={setEmail} />
-                <InputField placeholder={translations.auth.password} value={password} onChangeText={setPassword} secureTextEntry />
-                <InputField placeholder={translations.auth.confirmPassword} value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
+            <View style={{marginBottom:16}}>
+                <InputField label={translations.auth.email} placeholder={translations.auth.email} value={email} onChangeText={setEmail} />
+                <InputField label={translations.auth.password} placeholder={translations.auth.password} value={password} onChangeText={setPassword} secureTextEntry />
+                <InputField label={translations.auth.confirmPassword} placeholder={translations.auth.confirmPassword} value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
             </View>
             <SubmitButton title={translations.auth.signUp} onPress={handleRegister} />
             <Or text={translations.auth.orRegister}/>
             <SocialButtonsContainer />
-        </View>
+        </AuthLayout>
     );
 };
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 16,
-        backgroundColor: '#fff0f3',
-        fontSize: 24,
-        fontWeight: '600',
-        textAlign: 'center',
-    },
-    title: {
-
-        marginBottom: 16,
-        color: '#c9184a',
-    },
-    inputContainer: {
-        marginBottom: 16,
-    },
-    orText: {
-        textAlign: 'center',
-        marginVertical: 16,
-        color: '#999',
-    }
-});

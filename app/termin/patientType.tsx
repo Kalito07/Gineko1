@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
 
-export default function Appointment({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
+export default function PatientTypeScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [pregnant, setPregnant] = useState<string | null>(null);
 
     const handleOptionChange = (value: string) => {

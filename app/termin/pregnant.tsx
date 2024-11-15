@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { Checkbox } from 'react-native-paper'; // Import from react-native-paper
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
-import { RadioButton } from 'react-native-paper';
-import Checkbox from 'expo-checkbox';
 
-export default function Pregnant({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
+type Symptoms = {
+    fever: boolean;
+    bleeding: boolean;
+    abdominalPain: boolean;
+    reducedMovement: boolean;
+    shortnessOfBreath: boolean;
+    burningUrination: boolean;
+    cramps: boolean;
+    diarrheaConstipation: boolean;
+    dizziness: boolean;
+    vaginalDischarge: boolean;
+    severeItching: boolean;
+    severeNausea: boolean;
+};
+
+export default function PregnantScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [visitType, setVisitType] = useState<string | null>(null);
-    const [symptoms, setSymptoms] = useState({
+    const [symptoms, setSymptoms] = useState<Symptoms>({
         fever: false,
         bleeding: false,
         abdominalPain: false,
@@ -22,7 +36,7 @@ export default function Pregnant({ navigation }: { navigation: NavigationProp<Ro
         severeNausea: false,
     });
 
-    const handleSymptomChange = (symptom: string) => {
+    const handleSymptomChange = (symptom: keyof Symptoms) => {
         setSymptoms((prevSymptoms) => ({
             ...prevSymptoms,
             [symptom]: !prevSymptoms[symptom],
@@ -41,19 +55,9 @@ export default function Pregnant({ navigation }: { navigation: NavigationProp<Ro
 
             <View style={styles.radioGroup}>
                 <TouchableOpacity onPress={() => setVisitType('true')} style={styles.radioButton}>
-                    <RadioButton
-                        value="true"
-                        status={visitType === 'true' ? 'checked' : 'unchecked'}
-                        onPress={() => setVisitType('true')}
-                    />
                     <Text style={styles.radioLabel}>Женска консултация (Профилактичен преглед)</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setVisitType('false')} style={styles.radioButton}>
-                    <RadioButton
-                        value="false"
-                        status={visitType === 'false' ? 'checked' : 'unchecked'}
-                        onPress={() => setVisitType('false')}
-                    />
                     <Text style={styles.radioLabel}>Гинекологичен преглед</Text>
                 </TouchableOpacity>
             </View>
@@ -64,8 +68,8 @@ export default function Pregnant({ navigation }: { navigation: NavigationProp<Ro
                     {Object.keys(symptoms).map((symptom) => (
                         <View key={symptom} style={styles.checkboxContainer}>
                             <Checkbox
-                                value={symptoms[symptom]}
-                                onValueChange={() => handleSymptomChange(symptom)}
+                                status={symptoms[symptom as keyof Symptoms] ? 'checked' : 'unchecked'}
+                                onPress={() => handleSymptomChange(symptom as keyof Symptoms)}
                             />
                             <Text style={styles.checkboxLabel}>
                                 {symptom.replace(/([A-Z])/g, ' $1')}

@@ -9,43 +9,45 @@ import SocialButtonsContainer from "@/components/auth/SocialButtonsContainer";
 import AuthTitle from "@/components/auth/AuthTitle";
 import SubmitButton from "@/components/auth/SubmitButton";
 import Or from "@/components/auth/Or";
+import AuthLayout from "@/layouts/_authLayout";
 
 export default function LoginScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userType, setUserType] = useState('patient'); // Default type is patient
+    const [userType, setUserType] = useState('patient');
 
     const handleLogin = () => {
         if (email && password) {
             console.log('User logged in');
-            console.log('User Type:', userType); // Log the selected user type
-            // navigation.navigate('TerminsScreen'); // Uncomment to navigate to the TerminsScreen
+            console.log('User Type:', userType);
+            navigation.navigate('termins');
         } else {
             console.log('Please enter valid credentials');
         }
     };
 
     return (
-        <View>
+        <AuthLayout>
             <Logo />
             <AuthTitle text={translations.auth.loginTitle} />
 
             <InputField
-                placeholder="Email"
+                label={translations.auth.email}
+                placeholder="example@example.com"
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
             />
             <InputField
-                placeholder="Password"
+                label={translations.auth.password}
+                placeholder="********ww"
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
             />
 
-            {/* Radio Buttons for User Type Selection */}//TODO: MAKE BETTER
-            <Text style={styles.userTypeLabel}>Select User Type:</Text>
             <View style={styles.radioContainer}>
+                {/* TODO: MAKE BETTER */}
                 <TouchableOpacity
                     style={styles.radioButton}
                     onPress={() => setUserType('patient')}
@@ -70,15 +72,13 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
             <SocialButtonsContainer />
 
             <Text style={{ color: '#A0AEC0', textAlign: 'center' }}>
-                {translations.auth.withoutAccount}
-                <Text
-                    style={{ color: '#3182CE' }}
-                    onPress={() => navigation.navigate('register')}
-                >
-                    {translations.auth.signUp}
-                </Text>
+                {translations.auth.withoutAccount}{' '}
+
             </Text>
-        </View>
+            <TouchableOpacity>
+                <Text style={{ color: '#3182CE' }} onPress={() => navigation.navigate('register')}>{translations.auth.signUp}</Text>
+            </TouchableOpacity>
+        </AuthLayout>
     );
 }
 

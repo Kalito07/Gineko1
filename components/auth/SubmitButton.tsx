@@ -3,19 +3,13 @@ import React from "react";
 
 export default function SubmitButton ({ onPress, title }:any)
 { return(
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text>{title}</Text>
+    <TouchableOpacity style={{backgroundColor: '#c9184a',
+        paddingVertical: 12,
+        borderRadius: 8,
+        alignItems: 'center'}} onPress={onPress}>
+        <Text style={{            color: '#fff',
+            fontSize: 16,
+            fontWeight: '500'}}>{title}</Text>
     </TouchableOpacity>
 );
 }
-
-const styles = StyleSheet.create({
-    button: {
-        backgroundColor: '#c9184a',
-        paddingVertical: 12,
-        borderRadius: 8,
-        alignItems: 'center',
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '500'
-    }});

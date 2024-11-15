@@ -3,13 +3,11 @@ import React from "react";
 
 export default function Logo(){
     return(
-    <View style={{alignItems: 'center',
-        marginBottom: 24,
-        height: 50,
-        width: 100}}>
+    <View style={{marginVertical: 24, margin:"auto"}}>
             <Image
-                source={require("../images/logo.png")}
+                source={require("../../assets/images/logo.png")}
                 alt="Logo"
+                style={{height:150, width:220}}
             />
         </View>
     );

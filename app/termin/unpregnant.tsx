@@ -3,9 +3,19 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-nati
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
 
-export default function Nonpregnant({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
+type Symptoms = {
+    heavyBleeding: boolean;
+    breastPain: boolean;
+    irregularMenstruation: boolean;
+    burningUrination: boolean;
+    dizziness: boolean;
+    vaginalDischarge: boolean;
+    severeItching: boolean;
+};
+
+export default function UnpregnantScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [visitType, setVisitType] = useState('true');
-    const [symptoms, setSymptoms] = useState({
+    const [symptoms, setSymptoms] = useState<Symptoms>({
         heavyBleeding: false,
         breastPain: false,
         irregularMenstruation: false,
@@ -25,7 +35,7 @@ export default function Nonpregnant({ navigation }: { navigation: NavigationProp
         severeItching: "Severe Itching",
     };
 
-    const handleSymptomChange = (symptom: string) => {
+    const handleSymptomChange = (symptom: keyof Symptoms) => {
         setSymptoms((prevSymptoms) => ({
             ...prevSymptoms,
             [symptom]: !prevSymptoms[symptom],
@@ -73,13 +83,13 @@ export default function Nonpregnant({ navigation }: { navigation: NavigationProp
                         <TouchableOpacity
                             key={symptom}
                             style={styles.checkboxContainer}
-                            onPress={() => handleSymptomChange(symptom)}
+                            onPress={() => handleSymptomChange(symptom as keyof Symptoms)}
                         >
                             <View style={[
                                 styles.checkbox,
-                                symptoms[symptom] && styles.checkboxSelected
+                                symptoms[symptom as keyof Symptoms] && styles.checkboxSelected
                             ]} />
-                            <Text style={styles.checkboxLabel}>{symptomLabels[symptom]}</Text>
+                            <Text style={styles.checkboxLabel}>{symptomLabels[symptom as keyof Symptoms]}</Text>
                         </TouchableOpacity>
                     ))}
                 </View>

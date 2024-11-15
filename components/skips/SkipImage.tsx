@@ -11,7 +11,8 @@ export function SkipImage(props: ImageProps) {
 const styles = StyleSheet.create({
     skipImageContainer: {
         flex: 1,
-        width: '100%',
+        width: '100%'
+
     },
     skipImage: {
         width: "100%",

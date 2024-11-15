@@ -5,14 +5,20 @@ import { SkipImage } from "@/components/skips/SkipImage";
 import { SkipText } from "@/components/skips/SkipText";
 import translations from './../../translations.json';
 import { SkipButton } from "@/components/skips/SkipButton";
-import SkipLayout from "@/layouts/SkipLayout";
+import _skipLayout from "@/layouts/_skipLayout";
+import SkipView from "@/components/skips/SkipView";
 
-export default function Skip2Screen ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
+export default function Skip2Screen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     return (
-        <SkipLayout>
-            <SkipImage source={require('@/assets/images/skip2.jpg')} alt="Illustration of a woman with headphones working on a laptop"/>
+        <_skipLayout>
+            <SkipImage source={require('@/assets/images/skip2.jpg')} alt="Illustration of a woman with headphones working on a laptop" />
+            <SkipView>
             <SkipText text={translations.skips.skip2Text} />
-            <SkipButton navigation={navigation} targetScreen="skip3" />
-        </SkipLayout>
+            <SkipButton
+                navigation={navigation}
+                targetScreen="skip3"
+            />
+                </SkipView>
+        </_skipLayout>
     );
 };

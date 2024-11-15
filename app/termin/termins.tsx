@@ -3,7 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
 
-export default function ViewAppointments({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
+export default function TerminsScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [appointments, setAppointments] = useState([
         new Date('2024-09-15T10:00:00'),
         new Date('2024-09-16T14:30:00'),

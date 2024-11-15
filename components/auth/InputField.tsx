@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, Text, StyleSheet } from 'react-native';
+import { TextInput, View, Text } from 'react-native';
 
 export default function InputField({
                                        label,
@@ -10,10 +10,16 @@ export default function InputField({
                                        ...rest
                                    }: any) {
     return (
-        <View style={styles.container}>
-            <Text style={styles.label}>{label}</Text>
+        <View style={{marginVertical: 16}}>
+            <Text style={{fontSize: 16,
+                color: '#333',
+                marginBottom: 4}}>{label}</Text>
             <TextInput
-                style={styles.input}
+                style={{padding: 10,
+                    borderWidth: 1,
+                    borderColor: '#ffb3c1',
+                    borderRadius: 8,
+                    fontSize: 16}}
                 placeholder={placeholder}
                 value={value}
                 onChangeText={onChangeText}
@@ -23,21 +29,3 @@ export default function InputField({
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        marginBottom: 16,
-    },
-    label: {
-        fontSize: 16,
-        color: '#333',
-        marginBottom: 4,
-    },
-    input: {
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 8,
-        fontSize: 16,
-    },
-});

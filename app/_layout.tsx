@@ -86,7 +86,7 @@ function RootLayoutNav() {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
-                        name="unPregnant"
+                        name="unpregnant"
                         component={UnpregnantScreen}
                         options={{ headerShown: false }}
                     />

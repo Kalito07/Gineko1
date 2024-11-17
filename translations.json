@@ -15,6 +15,10 @@
     "orLogin": "или влез с",
     "loginTitle": "Влез в акаунта си",
     "registerTitle": "Създай акаунт",
-    "withoutAccount": "Нямаш акаунт? "
+    "withoutAccount": "Нямаш акаунт? ",
+    "typeOfUser": "Какъв потребител сте?",
+    "patient": "Пациент",
+    "doctor": "Лекар",
+    "":""
   }
 }

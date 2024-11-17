@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
 
@@ -43,8 +43,13 @@ export default function UnpregnantScreen({ navigation }: { navigation: Navigatio
     };
 
     const submitForm = () => {
+        if (visitType === 'false' && !Object.values(symptoms).some(Boolean)) {
+            Alert.alert('Validation Error', 'Please select at least one symptom.');
+            return;
+        }
         console.log('Selected Visit Type:', visitType);
         console.log('Symptoms:', symptoms);
+        Alert.alert('Success', 'Your information has been submitted.');
     };
 
     return (
@@ -56,6 +61,8 @@ export default function UnpregnantScreen({ navigation }: { navigation: Navigatio
                 <TouchableOpacity
                     style={styles.radioOption}
                     onPress={() => setVisitType('true')}
+                    accessibilityRole="button"
+                    accessibilityLabel="Select prophylactic check-up"
                 >
                     <View style={[
                         styles.radioCircle,
@@ -67,6 +74,8 @@ export default function UnpregnantScreen({ navigation }: { navigation: Navigatio
                 <TouchableOpacity
                     style={styles.radioOption}
                     onPress={() => setVisitType('false')}
+                    accessibilityRole="button"
+                    accessibilityLabel="Select gynecological check-up"
                 >
                     <View style={[
                         styles.radioCircle,
@@ -84,6 +93,9 @@ export default function UnpregnantScreen({ navigation }: { navigation: Navigatio
                             key={symptom}
                             style={styles.checkboxContainer}
                             onPress={() => handleSymptomChange(symptom as keyof Symptoms)}
+                            accessibilityRole="checkbox"
+                            accessibilityState={{ checked: symptoms[symptom as keyof Symptoms] }}
+                            accessibilityLabel={`Select symptom: ${symptomLabels[symptom as keyof Symptoms]}`}
                         >
                             <View style={[
                                 styles.checkbox,
@@ -106,20 +118,20 @@ const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
         padding: 20,
-        backgroundColor: '#fff',
+        backgroundColor: '#FFEADD',
     },
     header: {
         fontSize: 24,
         fontWeight: '500',
         textAlign: 'center',
         marginBottom: 16,
-        color: '#333',
+        color: '#FF6666',
     },
     subHeader: {
         fontSize: 16,
         textAlign: 'center',
         marginBottom: 24,
-        color: '#555',
+        color: '#FF8989',
     },
     radioGroup: {
         flexDirection: 'row',
@@ -135,11 +147,11 @@ const styles = StyleSheet.create({
         width: 20,
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: '#3182CE',
+        borderColor: '#FCAEAE',
         marginRight: 8,
     },
     radioSelected: {
-        backgroundColor: '#3182CE',
+        backgroundColor: '#FF6666',
     },
     radioLabel: {
         fontSize: 16,
@@ -151,7 +163,7 @@ const styles = StyleSheet.create({
     symptomsHeader: {
         fontSize: 18,
         fontWeight: '500',
-        color: '#333',
+        color: '#FF6666',
         marginBottom: 16,
     },
     checkboxContainer: {
@@ -164,18 +176,18 @@ const styles = StyleSheet.create({
         width: 20,
         borderRadius: 4,
         borderWidth: 2,
-        borderColor: '#3182CE',
+        borderColor: '#FCAEAE',
         marginRight: 8,
     },
     checkboxSelected: {
-        backgroundColor: '#3182CE',
+        backgroundColor: '#FF6666',
     },
     checkboxLabel: {
         fontSize: 16,
         color: '#333',
     },
     button: {
-        backgroundColor: '#3182CE',
+        backgroundColor: '#FF6666',
         paddingVertical: 12,
         borderRadius: 8,
         alignItems: 'center',

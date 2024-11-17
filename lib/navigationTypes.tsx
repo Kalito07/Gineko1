@@ -6,7 +6,7 @@ export type RootStackParamList = {
     register: any;
     termin:any;
     termins:any;
-    unpregnant:any;
+    unpregnant: undefined;
     pregnant:any;
     patientType:any;
     profile:any;

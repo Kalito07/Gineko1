@@ -51,48 +51,60 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#fff',
+        backgroundColor: '#FFEADD', // Light cream background
     },
     header: {
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 20,
+        color: '#FF6666', // Vibrant red for main header
     },
     subHeader: {
-        fontSize: 16,
+        fontSize: 18,
+        fontWeight: '500',
         textAlign: 'center',
-        marginBottom: 10,
+        color: '#FCAEAE', // Soft pink for subheaders
+        marginBottom: 15,
     },
     appointmentRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingVertical: 10,
+        paddingVertical: 12,
         borderBottomWidth: 1,
-        borderColor: '#ddd',
+        borderColor: '#FF8989', // Medium pink border
     },
     dateText: {
         fontSize: 16,
+        fontWeight: '500',
+        color: '#FF6666', // Vibrant red for text
     },
     timeText: {
         fontSize: 16,
+        fontWeight: '500',
+        color: '#FF6666',
     },
     noAppointmentsText: {
         textAlign: 'center',
         fontSize: 16,
+        color: '#FF8989', // Medium pink for no appointments text
         marginVertical: 20,
-        color: '#555',
     },
     button: {
-        backgroundColor: '#3182CE',
+        backgroundColor: '#FF6666', // Vibrant red for the button
         paddingVertical: 12,
         borderRadius: 8,
         alignItems: 'center',
         marginTop: 20,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
     },
     buttonText: {
-        color: '#FFF',
+        color: '#FFEADD', // Light cream for button text
         fontSize: 16,
-        fontWeight: '500',
+        fontWeight: '600',
     },
 });

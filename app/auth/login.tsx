@@ -10,6 +10,8 @@ import AuthTitle from "@/components/auth/AuthTitle";
 import SubmitButton from "@/components/auth/SubmitButton";
 import Or from "@/components/auth/Or";
 import AuthLayout from "@/layouts/_authLayout";
+import {RadioButton} from "react-native-paper";
+import RadioButtonComponent from "@/components/auth/RadioButton";
 
 export default function LoginScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [email, setEmail] = useState('');
@@ -46,24 +48,31 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
                 onChangeText={setPassword}
             />
 
-            <View style={styles.radioContainer}>
-                {/* TODO: MAKE BETTER */}
-                <TouchableOpacity
-                    style={styles.radioButton}
-                    onPress={() => setUserType('patient')}
-                >
-                    <View style={[styles.radioCircle, userType === 'patient' && styles.radioSelected]} />
-                    <Text style={styles.radioText}>Patient</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={styles.radioButton}
-                    onPress={() => setUserType('doctor')}
-                >
-                    <View style={[styles.radioCircle, userType === 'doctor' && styles.radioSelected]} />
-                    <Text style={styles.radioText}>Doctor</Text>
-                </TouchableOpacity>
+            <View style={{ marginVertical: 10 }}>
+                <Text style={{
+                    fontSize: 18,
+                    fontWeight: '500',
+                    color: '#333',
+                    marginBottom: 10,
+                    textAlign: 'left',
+                }}>
+                    {translations.auth.typeOfUser}
+                </Text>
+                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                    <RadioButtonComponent
+                        label={translations.auth.patient}
+                        selected={userType === 'patient'}
+                        onPress={() => setUserType('patient')}
+                    />
+                    <RadioButtonComponent
+                        label={translations.auth.doctor}
+                        selected={userType === 'doctor'}
+                        onPress={() => setUserType('doctor')}
+                    />
+                </View>
             </View>
+
+
 
             <SubmitButton title={translations.auth.logIn} onPress={handleLogin} />
 
@@ -81,38 +90,3 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
         </AuthLayout>
     );
 }
-
-const styles = StyleSheet.create({
-    userTypeLabel: {
-        marginTop: 16,
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#333',
-    },
-    radioContainer: {
-        flexDirection: 'row',
-        marginVertical: 10,
-    },
-    radioButton: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginRight: 20,
-    },
-    radioCircle: {
-        height: 20,
-        width: 20,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#ccc',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    radioSelected: {
-        backgroundColor: '#3182CE',
-    },
-    radioText: {
-        marginLeft: 8,
-        fontSize: 16,
-        color: '#333',
-    },
-});

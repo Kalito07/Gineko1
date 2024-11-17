@@ -1,5 +1,4 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from "@/lib/navigationTypes";
 import { SkipImage } from "@/components/skips/SkipImage";

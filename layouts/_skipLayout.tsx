@@ -1,12 +1,16 @@
-import {ScrollView, View} from "react-native";
-import {ReactNode} from "react";
+import { ScrollView, View } from "react-native";
+import React, { ReactNode } from "react";
 
 export default function _skipLayout({ children }: { children: ReactNode }) {
-    return(
+    return (
         <View style={{flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'white'}}><ScrollView contentContainerStyle={{flexGrow: 1,
-            justifyContent: 'center'}}>{children}</ScrollView></View>
+            backgroundColor: '#FFEADD'}}>
+            <ScrollView contentContainerStyle={{flexGrow: 1,
+                justifyContent: 'center'}}>
+                {children}
+            </ScrollView>
+        </View>
     );
 }

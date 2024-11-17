@@ -1,10 +1,13 @@
-import { StyleSheet, View, Text } from "react-native";
-import {hidden} from "colorette";
+import { View, Text } from "react-native";
 
 export function SkipText({ text }: { text: string }) {
     return (
-        <View>
-            <Text style={{fontSize:24, fontWeight:'bold', color:'#590d22', textAlign: 'left', marginTop:60, padding:10}}>{text}</Text>
+        <View style={{paddingHorizontal: 20,
+             shadowOpacity: 0.5, paddingVertical: 10}}>
+            <Text style={{fontSize: 24,
+                fontWeight: 'bold',
+                color: 'black',
+                textAlign: 'left'}}>{text}</Text>
         </View>
     );
 }

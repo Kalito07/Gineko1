@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Logo(){
     return(
-    <View style={{marginVertical: 24, margin:"auto"}}>
+    <View style={{marginTop: 6, marginHorizontal:"auto", marginBottom:-16}}>
             <Image
                 source={require("../../assets/images/logo.png")}
                 alt="Logo"

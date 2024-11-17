@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
-import { Checkbox } from 'react-native-paper'; // Import from react-native-paper
+import { Checkbox } from 'react-native-paper';
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
+import translations from "./../../translations.json";
 
 type Symptoms = {
     fever: boolean;

@@ -1,19 +1,13 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
 
-type RadioButtonProps = {
-    selected: boolean;
-    onPress: () => void;
-    label: string;
-};
-
-export default function RadioButtonComponent({ selected, onPress, label }: RadioButtonProps) {
+export default function RadioButtonComponent({ selected, onPress, label }: any) {
     return (
         <TouchableOpacity
             style={{flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginVertical: 8}}
+                marginTop: 3, marginLeft:4}}
             onPress={onPress}
             accessible={true}
             accessibilityLabel={label}
@@ -23,14 +17,14 @@ export default function RadioButtonComponent({ selected, onPress, label }: Radio
             <View style={[{height: 24,
                 width: 24,
                 borderRadius: 12,
-                borderWidth: 2,
-                borderColor: '#ccc',
+                borderWidth: 1,
+                borderColor: '#978386',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginRight: 10}, selected && {backgroundColor: '#3182CE',
-                borderColor: '#3182CE'}]} />
+                marginRight: 6}, selected && {backgroundColor: '#c9184a',
+                borderColor: '#c9184a'}]} />
             <Text style={{fontSize: 16,
-                color: '#333'}}>{label}</Text>
+                color: '#978386'}}>{label}</Text>
         </TouchableOpacity>
     );
 }

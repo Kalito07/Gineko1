@@ -10,4 +10,5 @@ export type RootStackParamList = {
     pregnant:any;
     patientType:any;
     profile:any;
+    tabNavigation:any;
 };

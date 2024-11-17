@@ -1,24 +1,33 @@
 {
   "skips": {
-    "skipButton": "Пропусни",
-    "skip1Text": "Запази час при гинеколог лесно и удобно",
+    "skipButton": "Пропуснете",
+    "skip1Text": "Запазете час при гинеколог лесно и удобно",
     "skip2Text": "Определяне на най-подходящия час за преглед",
     "skip3Text": "Гарантирана защита на данните"
   },
   "auth": {
     "email": "Имейл",
     "password": "Парола",
-    "confirmPassword": "Потвърди паролата",
-    "signUp": "Регистрирай се",
-    "logIn": "Влез",
-    "orRegister": "или се регистрирай с",
-    "orLogin": "или влез с",
-    "loginTitle": "Влез в акаунта си",
-    "registerTitle": "Създай акаунт",
-    "withoutAccount": "Нямаш акаунт? ",
+    "confirmPassword": "Потвърдете паролата",
+    "signUp": "Регистрирайте се",
+    "logIn": "Влезте",
+    "orRegister": "или се регистрирайте с",
+    "orLogin": "или влезте с",
+    "loginTitle": "Здравейте отново",
+    "registerTitle": "Създайте акаунт",
+    "withoutAccount": "Нямате акаунт? ",
     "typeOfUser": "Какъв потребител сте?",
     "patient": "Пациент",
     "doctor": "Лекар",
-    "":""
+    "forgotPassword":"Забавена парола?"
+  },
+  "termin": {
+   "terminsTitle": "Запазени часове",
+    "delete": "Изтрийте",
+    "terminSubmin": "Запазете час",
+    "noTermins": "Нямате запазени часове",
+    "pregnant": "Бременна",
+    "unpregnant": "Небременна",
+    "state?": "Какво е състоянието Ви?"
   }
 }

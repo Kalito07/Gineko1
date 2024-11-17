@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from "@/lib/navigationTypes";
 import Logo from "@/components/auth/Logo";
@@ -10,34 +10,57 @@ import SocialButtonsContainer from "@/components/auth/SocialButtonsContainer";
 import AuthTitle from "@/components/auth/AuthTitle";
 import Or from "@/components/auth/Or";
 import AuthLayout from "@/layouts/_authLayout";
+import PatientType from "@/components/auth/PatientType";
 
-export default function RegisterScreen ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
+export default function RegisterScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [userType, setUserType] = useState('patient');
 
     const handleRegister = () => {
-        // if (email && password && password === confirmPassword) {
+        // if (email && password && confirmPassword && password === confirmPassword) {
         //     console.log('New user registered');
-        //     navigation.navigate('register');
+        //     console.log('User Type:', userType);
+            navigation.navigate('tabNavigation');
         // } else {
-        //     console.log('Please fill in all fields correctly');
+        //     console.log('Please fill in all fields correctly or ensure passwords match');
         // }
-        navigation.navigate('termins');
     };
 
     return (
         <AuthLayout>
             <Logo />
-            <AuthTitle test={translations.auth.registerTitle}/>
-            <View style={{marginBottom:16}}>
-                <InputField label={translations.auth.email} placeholder={translations.auth.email} value={email} onChangeText={setEmail} />
-                <InputField label={translations.auth.password} placeholder={translations.auth.password} value={password} onChangeText={setPassword} secureTextEntry />
-                <InputField label={translations.auth.confirmPassword} placeholder={translations.auth.confirmPassword} value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
+            <AuthTitle text={translations.auth.registerTitle} />
+            <View style={{ marginBottom: 16 }}>
+                <InputField
+                    label={translations.auth.email}
+                    placeholder="example@example.com"
+                    value={email}
+                    onChangeText={setEmail}
+                    keyboardType="email-address"
+                />
+                <InputField
+                    label={translations.auth.password}
+                    placeholder="********"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                />
+                <InputField
+                    label={translations.auth.confirmPassword}
+                    placeholder="********"
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                    secureTextEntry
+                />
             </View>
+
+            <PatientType userType={userType} setUserType={setUserType} />
+
             <SubmitButton title={translations.auth.signUp} onPress={handleRegister} />
-            <Or text={translations.auth.orRegister}/>
+            <Or text={translations.auth.orRegister} />
             <SocialButtonsContainer />
         </AuthLayout>
     );
-};
+}

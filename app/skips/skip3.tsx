@@ -11,7 +11,7 @@ import SkipView from "@/components/skips/SkipView";
 export default function Skip3Screen ({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     return (
         <_skipLayout>
-            <SkipImage source={require('@/assets/images/skip3.jpg')} alt="Illustration of a woman with headphones working on a laptop"/>
+            <SkipImage source={require('@/assets/images/skip3.png')} alt="Illustration of a woman with headphones working on a laptop"/>
             <SkipView>
             <SkipText text={translations.skips.skip3Text} />
             <SkipButton navigation={navigation} targetScreen="login" />

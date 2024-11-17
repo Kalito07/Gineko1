@@ -12,8 +12,8 @@ export default function Skip1Screen({ navigation }: { navigation: NavigationProp
     return (
         <_skipLayout>
                 <SkipImage
-                    source={require('@/assets/images/skip1.jpg')}
-                    alt="Illustration of a woman with headphones working on a laptop"
+                    source={require('@/assets/images/skip1.png')}
+                    alt="Illustration of a woman with headphones working on a laptop"//TODO: alt
                 />
                 <SkipView>
                     <SkipText text={translations.skips.skip1Text} />

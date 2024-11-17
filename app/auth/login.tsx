@@ -10,18 +10,14 @@ import AuthTitle from "@/components/auth/AuthTitle";
 import SubmitButton from "@/components/auth/SubmitButton";
 import Or from "@/components/auth/Or";
 import AuthLayout from "@/layouts/_authLayout";
-import {RadioButton} from "react-native-paper";
-import RadioButtonComponent from "@/components/auth/RadioButton";
 
 export default function LoginScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userType, setUserType] = useState('patient');
 
     const handleLogin = () => {
         if (email && password) {
             console.log('User logged in');
-            console.log('User Type:', userType);
             navigation.navigate('termins');
         } else {
             console.log('Please enter valid credentials');
@@ -33,6 +29,9 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
             <Logo />
             <AuthTitle text={translations.auth.loginTitle} />
 
+            {/* Social Buttons and Without Account Section */}
+
+
             <InputField
                 label={translations.auth.email}
                 placeholder="example@example.com"
@@ -42,51 +41,32 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
             />
             <InputField
                 label={translations.auth.password}
-                placeholder="********ww"
+                placeholder="********"
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
+                type={password}
             />
-
-            <View style={{ marginVertical: 10 }}>
-                <Text style={{
-                    fontSize: 18,
-                    fontWeight: '500',
-                    color: '#333',
-                    marginBottom: 10,
-                    textAlign: 'left',
-                }}>
-                    {translations.auth.typeOfUser}
-                </Text>
-                <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                    <RadioButtonComponent
-                        label={translations.auth.patient}
-                        selected={userType === 'patient'}
-                        onPress={() => setUserType('patient')}
-                    />
-                    <RadioButtonComponent
-                        label={translations.auth.doctor}
-                        selected={userType === 'doctor'}
-                        onPress={() => setUserType('doctor')}
-                    />
-                </View>
-            </View>
-
-
 
             <SubmitButton title={translations.auth.logIn} onPress={handleLogin} />
 
             <Or text={translations.auth.orLogin} />
-
-            <SocialButtonsContainer />
-
-            <Text style={{ color: '#A0AEC0', textAlign: 'center' }}>
-                {translations.auth.withoutAccount}{' '}
-
-            </Text>
-            <TouchableOpacity>
-                <Text style={{ color: '#3182CE' }} onPress={() => navigation.navigate('register')}>{translations.auth.signUp}</Text>
-            </TouchableOpacity>
+            <View style={{marginBottom: 130,
+                flex: 1,
+                justifyContent: 'center'}}>
+                <SocialButtonsContainer />
+                <View style={{flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginBottom: 11}}>
+                    <Text style={{color: '#978386'}}>
+                        {translations.auth.withoutAccount}{' '}
+                    </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('register')}>
+                        <Text style={{color: '#c9184a'}}>{translations.auth.signUp}</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </AuthLayout>
     );
 }

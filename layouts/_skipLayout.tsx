@@ -6,7 +6,7 @@ export default function _skipLayout({ children }: { children: ReactNode }) {
         <View style={{flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#FFEADD'}}>
+            backgroundColor: 'white'}}>
             <ScrollView contentContainerStyle={{flexGrow: 1,
                 justifyContent: 'center'}}>
                 {children}

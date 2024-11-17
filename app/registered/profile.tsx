@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import InputField from "@/components/auth/InputField";
 import translations from "@/translations.json"
 
-export default function Profile () {
+export default function ProfileScreen () {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -11,7 +11,7 @@ export default function Profile () {
                 <Text style={styles.surname}>Surname</Text>
                 <View style={styles.avatar} />
             </View>
-            <InputField label={translations.auth.email} placeholder="example@gmail.com" /> //TODO: MAKE IT TO THE END
+            <InputField label={translations.auth.email} placeholder="example@gmail.com" /* TODO: MAKE IT TO THE END */ />
             <View style={styles.infoContainer}>
                 <View style={styles.infoBox}>
                     <Text style={styles.label}>Mail:</Text>

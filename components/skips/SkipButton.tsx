@@ -23,7 +23,11 @@ export function SkipButton({ navigation, targetScreen }: { navigation: Navigatio
                     style={{backgroundColor: '#590d22',
                         borderRadius: 35,
                         paddingTop: 8,
-                        paddingBottom: 20,
+                        paddingBottom: 20, shadowColor: '#978386',
+                        shadowOffset: { width: 0, height: 4 },
+                        shadowOpacity: 0.3,
+                        shadowRadius: 6,
+                        elevation: 5,
                         paddingHorizontal: 20}}
                     onPress={() => navigation.navigate(targetScreen)}>
                     <Text style={{color: 'white',

@@ -5,7 +5,7 @@ export default function SkipView({ children }: { children: React.ReactNode }) {
     return <View style={{
         borderTopRightRadius: 50,
         borderTopLeftRadius: 50,
-        backgroundColor: '#fff6f9',
+        backgroundColor: 'white',
         paddingHorizontal: 5,
         paddingVertical:10,
         width: '100%',

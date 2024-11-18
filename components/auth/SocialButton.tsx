@@ -6,14 +6,14 @@ export default function SocialButton({ source }: any) {
         <TouchableOpacity
             style={{
                 backgroundColor: 'white',
-                shadowColor: '#978386', // Dark shadow color for a more noticeable effect
+                shadowColor: '#978386',
                 shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.3,  // Reduced opacity for a subtler effect
-                shadowRadius: 6,  // Slightly softer shadow
+                shadowOpacity: 0.3,
+                shadowRadius: 6,
                 padding: 10,
                 borderRadius: 8,
                 alignItems: 'center',
-                elevation: 5, // For Android shadow
+                elevation: 5,
             }}
         >
             <Image source={source} style={{ height: 30, width: 30 }} />

@@ -4,6 +4,9 @@ import { Checkbox } from 'react-native-paper';
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
 import translations from "./../../translations.json";
+import SubmitButton from "@/components/auth/SubmitButton";
+import TerminLayout from "@/layouts/_terminLayout";
+import Title from "@/components/Title";
 
 type Symptoms = {
     fever: boolean;
@@ -50,9 +53,10 @@ export default function PregnantScreen({ navigation }: { navigation: NavigationP
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Час за бременни</Text>
-            <Text style={styles.subHeader}>Вид на посещението:</Text>
+        <TerminLayout>
+            <Title label={translations.termin["state?"]} />
+            <Text style={styles.header}>{translations.pregnant.pregnantTermin}</Text>
+            <Text style={styles.subHeader}>{translations.termin.typeTermin}:</Text>
 
             <View style={styles.radioGroup}>
                 <TouchableOpacity onPress={() => setVisitType('true')} style={styles.radioButton}>
@@ -81,10 +85,8 @@ export default function PregnantScreen({ navigation }: { navigation: NavigationP
                 </View>
             )}
 
-            <View style={styles.buttonContainer}>
-                <Button title="Продължи" onPress={submitForm} color="#FF6666" />
-            </View>
-        </View>
+            <SubmitButton onPress={()=>{navigation.navigate('termin')}} title={translations.termin.save}/>
+        </TerminLayout>
     );
 }
 

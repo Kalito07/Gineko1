@@ -1,17 +1,22 @@
 import React, { useEffect } from 'react';
+import { Alert } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Import this
-import { DarkTheme, DefaultTheme, NavigationContainer, ThemeProvider } from '@react-navigation/native';
-import { useColorScheme } from '@/components/useColorScheme';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+    DarkTheme,
+    DefaultTheme,
+    NavigationContainer,
+    NavigationProp,
+    ThemeProvider,
+} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Skip1Screen from "@/app/skips/skip1";
 import LoginScreen from "@/app/auth/login";
 import RegisterScreen from "@/app/auth/register";
 import Skip3Screen from "@/app/skips/skip3";
 import Skip2Screen from "@/app/skips/skip2";
-import 'react-native-url-polyfill/auto';
 import TerminsScreen from "@/app/termin/termins";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import ProfileScreen from "@/app/registered/profile";
@@ -19,6 +24,9 @@ import PatientTypeScreen from "@/app/termin/patientType";
 import PregnantScreen from "@/app/termin/pregnant";
 import UnpregnantScreen from "@/app/termin/unpregnant";
 import TerminScreen from "@/app/termin/termin";
+import { RootStackParamList } from "@/lib/navigationTypes";
+import { useColorScheme } from 'react-native';
+import {createNativeStackNavigator} from "react-native-screens/native-stack";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -111,27 +119,69 @@ function RootLayoutNav() {
     );
 }
 
+function handleLogout(navigation: NavigationProp<RootStackParamList>) {
+    Alert.alert(
+        "Logout",
+        "Are you sure you want to logout?",
+        [
+            {
+                text: "Cancel",
+                style: "cancel",
+            },
+            {
+                text: "Yes",
+                onPress: async () => {
+                    await AsyncStorage.clear();
+                    navigation.navigate("login");
+                },
+            },
+        ],
+        { cancelable: false }
+    );
+}
+
+// Separate Logout Component
+function LogoutButton({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
+    useEffect(() => {
+        handleLogout(navigation);
+    }, []);
+
+    return null;
+}
+
 function TabNavigator() {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName: keyof typeof Ionicons.glyphMap;
-                    if (route.name === 'profile') {
-                        iconName = focused ? 'person' : 'person-outline';
-                    } else if (route.name === 'termins') {
-                        iconName = focused ? 'calendar' : 'calendar-outline';
+                    if (route.name === "profile") {
+                        iconName = focused ? "person" : "person-outline";
+                    } else if (route.name === "termins") {
+                        iconName = focused ? "calendar" : "calendar-outline";
+                    } else if (route.name === "logout") {
+                        iconName = focused ? "log-out" : "log-out-outline";
                     }
 
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
-                tabBarActiveTintColor: '#ffb3c1',
-                tabBarInactiveTintColor: '#978386',
+                tabBarActiveTintColor: "#ffb3c1",
+                tabBarInactiveTintColor: "#978386",
                 headerShown: false,
             })}
         >
             <Tab.Screen name="termins" component={TerminsScreen} />
             <Tab.Screen name="profile" component={ProfileScreen} />
+            <Tab.Screen
+                name="logout"
+                component={LogoutButton} // Use the separate component here
+                listeners={({ navigation }) => ({
+                    tabPress: (e) => {
+                        e.preventDefault(); // Prevent default tab behavior
+                        handleLogout(navigation); // Trigger logout
+                    },
+                })}
+            />
         </Tab.Navigator>
     );
 }

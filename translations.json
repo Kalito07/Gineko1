@@ -28,6 +28,23 @@
     "noTermins": "Нямате запазени часове",
     "pregnant": "Бременна",
     "unpregnant": "Небременна",
-    "state?": "Какво е състоянието Ви?"
+    "state?": "Какво е състоянието Ви?",
+    "save": "Продължете",
+    "typeTermin": "Вид на посещението"
+  },
+  "pregnant": {
+    "pregnantTermin": "Час за бременни",
+    "fever": "треска",
+    "bleeding": "кървене",
+    "abdominalPain": "болки в корема",
+    "reducedMovement": "намалено движение на плода",
+    "shortnessOfBreath": "задух",
+    "burningUrination": "парене при уриниране",
+    "cramps": "крампи",
+    "diarrheaConstipation": "диария/запек",
+    "dizziness": "замаяност",
+    "vaginalDischarge": "вагинално течение",
+    "severeItching": "силен сърбеж",
+    "severeNausea": "силно гадене"
   }
 }

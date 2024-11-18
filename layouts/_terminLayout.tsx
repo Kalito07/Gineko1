@@ -7,7 +7,7 @@ export default function TerminLayout({ children }: { children: ReactNode }): any
             flex: 1,
             justifyContent: 'center',
             padding: 20,
-            backgroundColor: '#FFEADD',
+            backgroundColor: '#fff6f9',
         }}>{children}</View>
     );
 }

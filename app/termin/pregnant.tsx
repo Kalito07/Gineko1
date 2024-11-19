@@ -8,9 +8,24 @@ import SubmitButton from "@/components/auth/SubmitButton";
 import TerminLayout from "@/layouts/_terminLayout";
 import Title from "@/components/Title";
 
+type Symptoms = {
+    fever: boolean;
+    bleeding: boolean;
+    abdominalPain: boolean;
+    reducedMovement: boolean;
+    shortnessOfBreath: boolean;
+    burningUrination: boolean;
+    cramps: boolean;
+    diarrheaConstipation: boolean;
+    dizziness: boolean;
+    vaginalDischarge: boolean;
+    severeItching: boolean;
+    severeNausea: boolean;
+};
+
 export default function PregnantScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [visitType, setVisitType] = useState<string | null>(null);
-    const [symptoms, setSymptoms] = useState({
+    const [symptoms, setSymptoms] = useState<Symptoms>({
         fever: false,
         bleeding: false,
         abdominalPain: false,

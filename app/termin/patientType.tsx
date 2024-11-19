@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
 import TerminLayout from "@/layouts/_terminLayout";

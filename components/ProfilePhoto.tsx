@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
 import {NavigationProp} from "@react-navigation/native";
 import {RootStackParamList} from "@/lib/navigationTypes";
 
@@ -10,8 +10,7 @@ export default function ProfilePhoto({ navigation }: { navigation: NavigationPro
     return (
         <TouchableOpacity style={{position: 'absolute',
             top: 40,
-            right: 20,
-            zIndex: 1}} onPress={()=>handleProfilePhoto}>
+            right: 20}} onPress={()=>handleProfilePhoto}>
             <Image
                 // source={{ uri: 'https://via.placeholder.com/40' }} // Replace with user's image URL
                 style={{width: 55,

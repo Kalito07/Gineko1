@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from './../../lib/navigationTypes';
 import Logo from "@/components/auth/Logo";
@@ -28,10 +28,6 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
         <AuthLayout>
             <Logo />
             <AuthTitle text={translations.auth.loginTitle} />
-
-            {/* Social Buttons and Without Account Section */}
-
-
             <InputField
                 label={translations.auth.email}
                 placeholder="example@example.com"

@@ -9,6 +9,6 @@ export default function SkipView({ children }: { children: React.ReactNode }) {
         paddingHorizontal: 5,
         paddingVertical:10,
         width: '100%',
-        height:325
+        height:290
     }}>{children}</View>;
 }

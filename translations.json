@@ -6,6 +6,8 @@
     "skip3Text": "Гарантирана защита на данните"
   },
   "auth": {
+    "name": "Име",
+    "namePlaceHolder": "Ивана Иванова",
     "email": "Имейл",
     "password": "Парола",
     "confirmPassword": "Потвърдете паролата",
@@ -22,7 +24,7 @@
     "forgotPassword":"Забавена парола?"
   },
   "termin": {
-   "terminsTitle": "Запазени часове",
+    "terminsTitle": "Запазени часове",
     "delete": "Изтрийте",
     "terminSubmin": "Запазете час",
     "noTermins": "Нямате запазени часове",
@@ -30,7 +32,10 @@
     "unpregnant": "Небременна",
     "state?": "Какво е състоянието Ви?",
     "save": "Продължете",
-    "typeTermin": "Вид на посещението"
+    "typeTermin": "Вид на посещението",
+    "profile": "Профил",
+    "phone": "Телефон",
+    "state": "Състояние"
   },
   "pregnant": {
     "pregnantTermin": "Час за бременни",
@@ -46,5 +51,9 @@
     "vaginalDischarge": "вагинално течение",
     "severeItching": "силен сърбеж",
     "severeNausea": "силно гадене"
+  },
+  "unpregnant": {
+    "unpregnantTermin": "Час за небременни",
+
   }
 }

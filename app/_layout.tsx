@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
     DarkTheme,
     DefaultTheme,
-    NavigationContainer,
+    NavigationContainer, NavigationIndependentTree,
     NavigationProp,
     ThemeProvider,
 } from '@react-navigation/native';
@@ -26,7 +26,7 @@ import UnpregnantScreen from "@/app/termin/unpregnant";
 import TerminScreen from "@/app/termin/termin";
 import { RootStackParamList } from "@/lib/navigationTypes";
 import { useColorScheme } from 'react-native';
-import {createNativeStackNavigator} from "react-native-screens/native-stack";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -61,7 +61,8 @@ function RootLayoutNav() {
 
     return (
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <NavigationContainer independent={true}>
+            <NavigationIndependentTree >
+            <NavigationContainer >
                 <Stack.Navigator>
                     <Stack.Screen
                         name="skip1"
@@ -115,6 +116,7 @@ function RootLayoutNav() {
                     />
                 </Stack.Navigator>
             </NavigationContainer>
+            </NavigationIndependentTree>
         </ThemeProvider>
     );
 }
@@ -140,7 +142,6 @@ function handleLogout(navigation: NavigationProp<RootStackParamList>) {
     );
 }
 
-// Separate Logout Component
 function LogoutButton({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     useEffect(() => {
         handleLogout(navigation);
@@ -165,23 +166,35 @@ function TabNavigator() {
 
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
-                tabBarActiveTintColor: "#ffb3c1",
-                tabBarInactiveTintColor: "#978386",
+                tabBarActiveTintColor: "#590d22",
                 headerShown: false,
+                tabBarStyle: {
+                    height: 70,
+                    paddingBottom: 20,
+                    paddingTop: 10,
+                    backgroundColor: "#ffdae0",
+                },
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                },
+                tabBarIconStyle: {
+                    size: 30,
+                },
             })}
         >
             <Tab.Screen name="termins" component={TerminsScreen} />
             <Tab.Screen name="profile" component={ProfileScreen} />
             <Tab.Screen
                 name="logout"
-                component={LogoutButton} // Use the separate component here
+                component={LogoutButton}
                 listeners={({ navigation }) => ({
                     tabPress: (e) => {
-                        e.preventDefault(); // Prevent default tab behavior
-                        handleLogout(navigation); // Trigger logout
+                        e.preventDefault();
+                        handleLogout(navigation);
                     },
                 })}
             />
         </Tab.Navigator>
     );
 }
+

@@ -3,6 +3,9 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'rea
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
 import translations from "./../../translations.json";
+import TerminLayout from "@/layouts/_terminLayout";
+import SubmitButton from "@/components/auth/SubmitButton";
+import Title from "@/components/Title";
 
 type Symptoms = {
     heavyBleeding: boolean;
@@ -54,8 +57,8 @@ export default function UnpregnantScreen({ navigation }: { navigation: Navigatio
     };
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.header}>Час за небременни</Text>
+        <TerminLayout>
+            <Title label={translations.unpregnant.unpregnantTermin} />
             <Text style={styles.subHeader}>Вид на посещението:</Text>
 
             <View style={styles.radioGroup}>
@@ -108,19 +111,12 @@ export default function UnpregnantScreen({ navigation }: { navigation: Navigatio
                 </View>
             )}
 
-            <TouchableOpacity style={styles.button} onPress={submitForm}>
-                <Text style={styles.buttonText}>Продължи</Text>
-            </TouchableOpacity>
-        </ScrollView>
+            <SubmitButton onPress={() => navigation.navigate('termin')} title={translations.termin.save} />
+        </TerminLayout>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexGrow: 1,
-        padding: 20,
-        backgroundColor: '#FFEADD',
-    },
     header: {
         fontSize: 24,
         fontWeight: '500',

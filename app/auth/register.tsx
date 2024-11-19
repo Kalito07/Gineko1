@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from "@/lib/navigationTypes";
 import Logo from "@/components/auth/Logo";
@@ -10,7 +10,6 @@ import SocialButtonsContainer from "@/components/auth/SocialButtonsContainer";
 import AuthTitle from "@/components/auth/AuthTitle";
 import Or from "@/components/auth/Or";
 import AuthLayout from "@/layouts/_authLayout";
-import PatientType from "@/components/auth/PatientType";
 
 export default function RegisterScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [email, setEmail] = useState('');
@@ -55,8 +54,6 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
                     secureTextEntry
                 />
             </View>
-
-            <PatientType userType={userType} setUserType={setUserType} />
 
             <SubmitButton title={translations.auth.signUp} onPress={handleRegister} />
             <Or text={translations.auth.orRegister} />

@@ -54,8 +54,7 @@ export default function PregnantScreen({ navigation }: { navigation: NavigationP
 
     return (
         <TerminLayout>
-            <Title label={translations.termin["state?"]} />
-            <Text style={styles.header}>{translations.pregnant.pregnantTermin}</Text>
+            <Title label={translations.pregnant.pregnantTermin} />
             <Text style={styles.subHeader}>{translations.termin.typeTermin}:</Text>
 
             <View style={styles.radioGroup}>

@@ -1,53 +1,27 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import InputField from "@/components/auth/InputField";
 import translations from "@/translations.json"
+import Title from "@/components/Title";
 
 export default function ProfileScreen () {
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.name}>Name</Text>
-                <Text style={styles.surname}>Surname</Text>
-                <View style={styles.avatar} />
-            </View>
-            <InputField label={translations.auth.email} placeholder="example@gmail.com" /* TODO: MAKE IT TO THE END */ />
-            <View style={styles.infoContainer}>
-                <View style={styles.infoBox}>
-                    <Text style={styles.label}>Mail:</Text>
-                    <Text>example@gmail.com</Text>
-                </View>
-                <View style={styles.infoBox}>
-                    <Text style={styles.label}>Phone:</Text>
-                    <Text>+1 111 111 111</Text>
-                </View>
-                <View style={styles.infoBox}>
-                    <Text style={styles.label}>Country:</Text>
-                    <Text>City, Country</Text>
-                </View>
-            </View>
+        <View style={{flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 16,
+            backgroundColor: '#fff6f9'}}>
+            <Title label={translations.termin.profile}/>
+            <Image style={{height:60, width:60}}/>
+            <InputField label={translations.auth.name} />
+            <InputField label={translations.auth.email}/>
+            <InputField label={translations.termin.phone} placeholder="+1 111 111 111"/>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 16,
-    },
-    header: {
-        alignItems: 'center',
-    },
-    name: {
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    surname: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
+
     avatar: {
         width: 96,
         height: 96,

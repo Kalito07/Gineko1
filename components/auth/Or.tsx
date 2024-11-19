@@ -8,7 +8,7 @@ export default function Or({text}:any){
             paddingHorizontal: 16,
             fontSize: 15,
             textAlign: 'center',
-            marginVertical: 20,
+            marginVertical: 30,
             color: '#590d22'}}>-- {text} --</Text>
     );
 }

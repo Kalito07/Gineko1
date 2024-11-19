@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
@@ -8,24 +8,9 @@ import SubmitButton from "@/components/auth/SubmitButton";
 import TerminLayout from "@/layouts/_terminLayout";
 import Title from "@/components/Title";
 
-type Symptoms = {
-    fever: boolean;
-    bleeding: boolean;
-    abdominalPain: boolean;
-    reducedMovement: boolean;
-    shortnessOfBreath: boolean;
-    burningUrination: boolean;
-    cramps: boolean;
-    diarrheaConstipation: boolean;
-    dizziness: boolean;
-    vaginalDischarge: boolean;
-    severeItching: boolean;
-    severeNausea: boolean;
-};
-
 export default function PregnantScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [visitType, setVisitType] = useState<string | null>(null);
-    const [symptoms, setSymptoms] = useState<Symptoms>({
+    const [symptoms, setSymptoms] = useState({
         fever: false,
         bleeding: false,
         abdominalPain: false,
@@ -77,14 +62,14 @@ export default function PregnantScreen({ navigation }: { navigation: NavigationP
                                 color="#FF6666"
                             />
                             <Text style={styles.checkboxLabel}>
-                                {symptom.replace(/([A-Z])/g, ' $1')}
+                                {translations.pregnant[symptom as keyof typeof translations.pregnant]}
                             </Text>
                         </View>
                     ))}
                 </View>
             )}
 
-            <SubmitButton onPress={()=>{navigation.navigate('termin')}} title={translations.termin.save}/>
+            <SubmitButton onPress={submitForm} title={translations.termin.save} />
         </TerminLayout>
     );
 }
@@ -139,9 +124,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginLeft: 8,
         color: '#FF6666',
-    },
-    buttonContainer: {
-        marginTop: 30,
-        alignItems: 'center',
     },
 });

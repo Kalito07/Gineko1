@@ -158,10 +158,8 @@ function TabNavigator() {
                     let iconName: keyof typeof Ionicons.glyphMap;
                     if (route.name === "profile") {
                         iconName = focused ? "person" : "person-outline";
-                    } else if (route.name === "termins") {
+                    } else {
                         iconName = focused ? "calendar" : "calendar-outline";
-                    } else if (route.name === "logout") {
-                        iconName = focused ? "log-out" : "log-out-outline";
                     }
 
                     return <Ionicons name={iconName} size={size} color={color} />;
@@ -184,16 +182,6 @@ function TabNavigator() {
         >
             <Tab.Screen name="termins" component={TerminsScreen} />
             <Tab.Screen name="profile" component={ProfileScreen} />
-            <Tab.Screen
-                name="logout"
-                component={LogoutButton}
-                listeners={({ navigation }) => ({
-                    tabPress: (e) => {
-                        e.preventDefault();
-                        handleLogout(navigation);
-                    },
-                })}
-            />
         </Tab.Navigator>
     );
 }

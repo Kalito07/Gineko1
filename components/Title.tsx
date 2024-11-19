@@ -7,6 +7,6 @@ export default function Title({label}:any) {
             fontWeight: 'bold',
             textAlign: 'center',
             marginBottom: 20,
-            color: '#590d22'}}>{label}</Text>
+            color: '#590d22', marginTop:170}}>{label}</Text>
     );
  }

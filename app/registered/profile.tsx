@@ -24,7 +24,7 @@ export default function ProfileScreen() {
 
     return (
         <AuthLayout>
-            <View style={{marginTop:-100}}>
+            <View style={{marginTop:-120}}>
             <Title label={translations.termin.profile} />
             </View>
             <TouchableOpacity onPress={handleSelectImage} style={{marginVertical: 30,

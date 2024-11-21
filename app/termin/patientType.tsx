@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
     radioContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 20,
+        paddingVertical:10
     },
 });

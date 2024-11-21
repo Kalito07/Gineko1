@@ -23,7 +23,7 @@ export default function TerminsScreen({ navigation }: { navigation: NavigationPr
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout >
             <ProfilePhoto navigation={navigation}/>
             <Title label={translations.termin.terminsTitle} />
 

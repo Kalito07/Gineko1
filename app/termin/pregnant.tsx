@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
@@ -49,15 +49,24 @@ export default function PregnantScreen({ navigation }: { navigation: NavigationP
     };
 
     const submitForm = () => {
-        navigation.navigate('termin', {
-            visitType,
-            symptoms,
-            message: translations.termin.appointmentSaved,
-        });
+        if (visitType === 'false') {
+            navigation.navigate('symptoms', { symptoms });
+        } else {
+            navigation.navigate('termin', {
+                visitType,
+                symptoms,
+                message: translations.termin.appointmentSaved,
+            });
+        }
     };
 
+
+    const layoutStyle = visitType === 'false'
+        ? { paddingTop: -140 }
+        : { paddingVertical: 90 };
+
     return (
-        <AuthLayout style={{paddingVertical:90}}>
+        <AuthLayout style={layoutStyle}>
             <Title label={translations.pregnant.pregnantTermin} />
             <Text style={styles.subHeader}>{translations.termin.typeTermin}:</Text>
 
@@ -105,7 +114,7 @@ const styles = StyleSheet.create({
     subHeader: {
         fontSize: 18,
         marginBottom: 10,
-        color: '#FF8989',
+        color: '#590d22',
     },
     radioGroup: {
         flexDirection: 'column',

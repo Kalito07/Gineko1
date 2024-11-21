@@ -27,6 +27,7 @@ import TerminScreen from "@/app/termin/termin";
 import { RootStackParamList } from "@/lib/navigationTypes";
 import { useColorScheme } from 'react-native';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import SymptomsSelectionScreen from "@/app/termin/symptomsSelection";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -114,6 +115,7 @@ function RootLayoutNav() {
                             component={TerminScreen}
                             options={{ headerShown: false }}
                         />
+                        <Stack.Screen name="SymptomsSelection" component={SymptomsSelectionScreen} options={{ headerShown: false }}/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </NavigationIndependentTree>

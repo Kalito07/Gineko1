@@ -11,4 +11,5 @@ export type RootStackParamList = {
     patientType:any;
     profile:any;
     tabNavigation:any;
+    symptoms:any;
 };

@@ -10,8 +10,8 @@ export default function ProfilePhoto({ navigation }: any) {
         <View style={{flexDirection: 'row',
             alignItems: 'center',
             position: 'absolute',
-            top: 20,
-            right: 20}}>
+            top: 0,
+            right: 0}}>
             <Text style={{fontSize: 16,
                 fontWeight: 'bold',
                 color: '#590d22',

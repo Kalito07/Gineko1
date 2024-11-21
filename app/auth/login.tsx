@@ -45,7 +45,7 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
             />
             <SubmitButton title={translations.auth.logIn} onPress={handleLogin} />
             <Or text={translations.auth.orLogin} />
-            <View style={{marginBottom: 130,
+            <View style={{marginBottom: 110,
                 flex: 1,
                 justifyContent: 'center'}}>
                 <SocialButtonsContainer />

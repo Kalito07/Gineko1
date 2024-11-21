@@ -115,7 +115,7 @@ function RootLayoutNav() {
                             component={TerminScreen}
                             options={{ headerShown: false }}
                         />
-                        <Stack.Screen name="SymptomsSelection" component={SymptomsSelectionScreen} options={{ headerShown: false }}/>
+                        <Stack.Screen name="symptoms" component={SymptomsSelectionScreen} options={{ headerShown: false }}/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </NavigationIndependentTree>

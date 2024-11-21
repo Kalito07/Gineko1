@@ -32,24 +32,25 @@
     "unpregnant": "Небременна",
     "state?": "Какво е състоянието Ви?",
     "save": "Продължете",
-    "typeTermin": "Вид на посещението",
     "profile": "Профил",
     "phone": "Телефон",
     "state": "Състояние",
     "errorTitle": "Изборът е задължителен!",
     "ok": "Добре",
-    "errorMessage": "Първо направете избор, за да продължите!",
-    "symptoms": "Симптоми:",
-    "appointmentSaved": "Часът Ви е запазен!"
-  },
-  "pregnant": {
+    "errorMessage": "Първо изберете, за да продължите!",
+    "symptoms": "Какви симптоми имате?",
+    "appointmentSaved": "Часът Ви е запазен!",
     "pregnantTermin": "Час за бременни",
     "profilactica": "Женска консултация (Профилактичен преглед)",
     "gynecologyTermin": "Гинекологичен преглед",
+    "unpregnantTermin": "Час за небременни",
+    "profilactica2": "Профилактичен преглед"
+  },
+  "pregnant": {
     "fever": "треска",
     "bleeding": "кървене",
     "abdominalPain": "болки в корема",
-    "reducedMovement": "намалено движение на плода",
+    "reducedMovement": "намалено плодно \nдвижение",
     "shortnessOfBreath": "задух",
     "burningUrination": "парене при уриниране",
     "cramps": "крампи",
@@ -60,8 +61,13 @@
     "severeNausea": "силно гадене"
   },
   "unpregnant": {
-    "unpregnantTermin": "Час за небременни",
-
+    "heavyBleeding": "силно кървене",
+    "breastPain": "болка в гърдите",
+    "irregularMenstruation": "нередовен цикъл",
+    "burningUrination": "болезнено уриниране",
+    "dizziness": "замайване",
+    "vaginalDischarge": "вагинално течение",
+    "severeItching": "силен сърбеж"
   },
   "nav": {
     "termins": "часове",

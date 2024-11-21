@@ -5,7 +5,7 @@ export default function RadioButtonComponent({ selected, onPress, label }: any) 
     return (
         <TouchableOpacity
             style={{flexDirection: 'row',
-                alignItems: 'center'}}
+                alignItems: 'center', marginBottom:2}}
             onPress={onPress}
             accessible={true}
             accessibilityLabel={label}

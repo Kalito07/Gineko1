@@ -21,7 +21,7 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
         // if (email && password && confirmPassword && password === confirmPassword) {
         //     console.log('New user registered');
         //     console.log('User Type:', userType);
-            navigation.navigate('tabNavigation');
+        navigation.navigate('tabNavigation');
         // } else {
         //     console.log('Please fill in all fields correctly or ensure passwords match');
         // }
@@ -31,7 +31,6 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
         <AuthLayout>
             <Logo />
             <AuthTitle text={translations.auth.registerTitle} />
-            <View style={{ marginBottom: 16 }}>
                 <InputField
                     label={translations.auth.email}
                     placeholder="example@example.com"
@@ -53,11 +52,11 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
                     onChangeText={setConfirmPassword}
                     secureTextEntry
                 />
-            </View>
-
             <SubmitButton title={translations.auth.signUp} onPress={handleRegister} />
             <Or text={translations.auth.orRegister} />
+            <View style={{marginBottom: 24}}>
             <SocialButtonsContainer />
+            </View>
         </AuthLayout>
     );
 }

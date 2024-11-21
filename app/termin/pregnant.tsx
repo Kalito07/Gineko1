@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
 import translations from "./../../translations.json";
 import SubmitButton from "@/components/auth/SubmitButton";
-import TerminLayout from "@/layouts/_terminLayout";
 import Title from "@/components/Title";
+import RadioButtonComponent from "@/components/auth/RadioButton";
+import AuthLayout from "@/layouts/_authLayout";
 
 type Symptoms = {
     fever: boolean;
@@ -48,27 +49,26 @@ export default function PregnantScreen({ navigation }: { navigation: NavigationP
     };
 
     const submitForm = () => {
-        console.log('Selected Visit Type:', visitType);
-        console.log('Symptoms:', symptoms);
+        navigation.navigate('termin', {
+            visitType,
+            symptoms,
+            message: translations.termin.appointmentSaved,
+        });
     };
 
     return (
-        <TerminLayout>
+        <AuthLayout style={{paddingVertical:90}}>
             <Title label={translations.pregnant.pregnantTermin} />
             <Text style={styles.subHeader}>{translations.termin.typeTermin}:</Text>
 
             <View style={styles.radioGroup}>
-                <TouchableOpacity onPress={() => setVisitType('true')} style={styles.radioButton}>
-                    <Text style={styles.radioLabel}>Женска консултация (Профилактичен преглед)</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setVisitType('false')} style={styles.radioButton}>
-                    <Text style={styles.radioLabel}>Гинекологичен преглед</Text>
-                </TouchableOpacity>
+                <RadioButtonComponent onPress={() => setVisitType('true')} label={translations.pregnant.profilactica} />
+                <RadioButtonComponent onPress={() => setVisitType('false')} label={translations.pregnant.gynecologyTermin} />
             </View>
 
             {visitType === 'false' && (
                 <View style={styles.symptomsContainer}>
-                    <Text style={styles.legend}>Симптоми:</Text>
+                    <Text style={styles.legend}>{translations.termin.symptoms}</Text>
                     {Object.keys(symptoms).map((symptom) => (
                         <View key={symptom} style={styles.checkboxContainer}>
                             <Checkbox
@@ -85,7 +85,7 @@ export default function PregnantScreen({ navigation }: { navigation: NavigationP
             )}
 
             <SubmitButton onPress={submitForm} title={translations.termin.save} />
-        </TerminLayout>
+        </AuthLayout>
     );
 }
 

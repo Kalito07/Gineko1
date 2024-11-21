@@ -43,9 +43,7 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
                 onChangeText={setPassword}
                 type={password}
             />
-
             <SubmitButton title={translations.auth.logIn} onPress={handleLogin} />
-
             <Or text={translations.auth.orLogin} />
             <View style={{marginBottom: 130,
                 flex: 1,
@@ -53,8 +51,7 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
                 <SocialButtonsContainer />
                 <View style={{flexDirection: 'row',
                     justifyContent: 'center',
-                    alignItems: 'center',
-                    marginBottom: 11}}>
+                    alignItems: 'center', marginTop:-10}}>
                     <Text style={{color: '#978386'}}>
                         {translations.auth.withoutAccount}{' '}
                     </Text>

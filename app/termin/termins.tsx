@@ -5,10 +5,10 @@ import { RootStackParamList } from "@/lib/navigationTypes";
 import ProfilePhoto from "@/components/ProfilePhoto";
 import SubmitButton from "@/components/auth/SubmitButton";
 import translations from "./../../translations.json";
-import TerminLayout from "@/layouts/_terminLayout";
 import Title from "@/components/Title";
 import { AppointmentCard } from "@/components/AppointmentCard";
 import { EmptyState } from "@/components/EmptyState";
+import AuthLayout from "@/layouts/_authLayout";
 
 export default function TerminsScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [appointments, setAppointments] = useState([
@@ -23,8 +23,8 @@ export default function TerminsScreen({ navigation }: { navigation: NavigationPr
     };
 
     return (
-        <TerminLayout>
-            <ProfilePhoto />
+        <AuthLayout>
+            <ProfilePhoto navigation={navigation}/>
             <Title label={translations.termin.terminsTitle} />
 
             {appointments.length > 0 ? (
@@ -43,6 +43,6 @@ export default function TerminsScreen({ navigation }: { navigation: NavigationPr
                 onPress={() => navigation.navigate('patientType')}
                 title={translations.termin.terminSubmin}
             />
-        </TerminLayout>
+        </AuthLayout>
     );
 }

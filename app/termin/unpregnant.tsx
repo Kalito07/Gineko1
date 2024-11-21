@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/lib/navigationTypes";
 import translations from "./../../translations.json";
-import TerminLayout from "@/layouts/_terminLayout";
 import SubmitButton from "@/components/auth/SubmitButton";
 import Title from "@/components/Title";
+import AuthLayout from "@/layouts/_authLayout";
 
 type Symptoms = {
     heavyBleeding: boolean;
@@ -57,7 +57,7 @@ export default function UnpregnantScreen({ navigation }: { navigation: Navigatio
     };
 
     return (
-        <TerminLayout>
+        <AuthLayout>
             <Title label={translations.unpregnant.unpregnantTermin} />
             <Text style={styles.subHeader}>Вид на посещението:</Text>
 
@@ -112,7 +112,7 @@ export default function UnpregnantScreen({ navigation }: { navigation: Navigatio
             )}
 
             <SubmitButton onPress={() => navigation.navigate('termin')} title={translations.termin.save} />
-        </TerminLayout>
+        </AuthLayout>
     );
 }
 

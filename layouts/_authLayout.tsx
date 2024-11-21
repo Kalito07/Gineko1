@@ -1,12 +1,14 @@
 import { View } from 'react-native';
-import { ReactNode } from 'react';
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
+export default function AuthLayout({ children, style }: any) {
     return (
-        <View style={{flex: 1,
+        <View style={[{
+            flex: 1,
             backgroundColor: '#fff6f9',
-            padding: 20}}>
-                {children}
+            paddingHorizontal: 20,
+            paddingVertical: 30
+        }, style]}>
+            {children}
         </View>
     );
 }

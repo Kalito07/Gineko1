@@ -36,9 +36,16 @@
     "profile": "Профил",
     "phone": "Телефон",
     "state": "Състояние",
+    "errorTitle": "Изборът е задължителен!",
+    "ok": "Добре",
+    "errorMessage": "Първо направете избор, за да продължите!",
+    "symptoms": "Симптоми:",
+    "appointmentSaved": "Часът Ви е запазен!"
   },
   "pregnant": {
     "pregnantTermin": "Час за бременни",
+    "profilactica": "Женска консултация (Профилактичен преглед)",
+    "gynecologyTermin": "Гинекологичен преглед",
     "fever": "треска",
     "bleeding": "кървене",
     "abdominalPain": "болки в корема",
@@ -55,5 +62,10 @@
   "unpregnant": {
     "unpregnantTermin": "Час за небременни",
 
+  },
+  "nav": {
+    "termins": "часове",
+    "profile": "профил",
+    "logout": "изход"
   }
 }

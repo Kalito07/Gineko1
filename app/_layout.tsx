@@ -62,60 +62,60 @@ function RootLayoutNav() {
     return (
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
             <NavigationIndependentTree >
-            <NavigationContainer >
-                <Stack.Navigator>
-                    <Stack.Screen
-                        name="skip1"
-                        component={Skip1Screen}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="skip2"
-                        component={Skip2Screen}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="skip3"
-                        component={Skip3Screen}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="login"
-                        component={LoginScreen}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="register"
-                        component={RegisterScreen}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="tabNavigation"
-                        component={TabNavigator}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="patientType"
-                        component={PatientTypeScreen}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="pregnant"
-                        component={PregnantScreen}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="unpregnant"
-                        component={UnpregnantScreen}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="termin"
-                        component={TerminScreen}
-                        options={{ headerShown: false }}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer>
+                <NavigationContainer >
+                    <Stack.Navigator>
+                        <Stack.Screen
+                            name="skip1"
+                            component={Skip1Screen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="skip2"
+                            component={Skip2Screen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="skip3"
+                            component={Skip3Screen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="login"
+                            component={LoginScreen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="register"
+                            component={RegisterScreen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="tabNavigation"
+                            component={TabNavigator}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="patientType"
+                            component={PatientTypeScreen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="pregnant"
+                            component={PregnantScreen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="unpregnant"
+                            component={UnpregnantScreen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="termin"
+                            component={TerminScreen}
+                            options={{ headerShown: false }}
+                        />
+                    </Stack.Navigator>
+                </NavigationContainer>
             </NavigationIndependentTree>
         </ThemeProvider>
     );
@@ -153,23 +153,24 @@ function LogoutButton({ navigation }: { navigation: NavigationProp<RootStackPara
 function TabNavigator() {
     return (
         <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
+            screenOptions={({route}) => ({
+                tabBarIcon: ({focused, color, size}) => {
                     let iconName: keyof typeof Ionicons.glyphMap;
                     if (route.name === "profile") {
                         iconName = focused ? "person" : "person-outline";
-                    } else {
+                    } else if (route.name === "termins") {
                         iconName = focused ? "calendar" : "calendar-outline";
+                    } else if (route.name === "logout") {
+                        iconName = focused ? "log-out" : "log-out-outline";
                     }
 
-                    return <Ionicons name={iconName} size={size} color={color} />;
+                    return <Ionicons name={iconName} size={size} color={color}/>;
                 },
                 tabBarActiveTintColor: "#590d22",
                 headerShown: false,
                 tabBarStyle: {
-                    height: 70,
-                    paddingBottom: 20,
-                    paddingTop: 10,
+                    height: 75,
+                    paddingTop: 5,
                     backgroundColor: "#ffdae0",
                 },
                 tabBarLabelStyle: {
@@ -180,9 +181,18 @@ function TabNavigator() {
                 },
             })}
         >
-            <Tab.Screen name="termins" component={TerminsScreen} />
-            <Tab.Screen name="profile" component={ProfileScreen} />
+            <Tab.Screen name="termins" component={TerminsScreen}/>
+            <Tab.Screen name="profile" component={ProfileScreen}/>
+            <Tab.Screen
+                name="logout"
+                component={LogoutButton}
+                listeners={({navigation}) => ({
+                    tabPress: (e) => {
+                        e.preventDefault();
+                        handleLogout(navigation);
+                    },
+                })}
+            />
         </Tab.Navigator>
     );
 }
-

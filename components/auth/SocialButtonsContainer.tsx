@@ -5,7 +5,7 @@ import React from "react";
 export default function SocialButtonsContainer () { return(
     <View style={{flexDirection: 'row',
         justifyContent: 'center',
-        gap: 15, marginBottom:20}}>
+        gap: 15, marginBottom:30}}>
         <SocialButton source={require('@/assets/images/google.png')} />
         <SocialButton source={require('@/assets/images/facebook.png')} />
         <SocialButton source={require('@/assets/images/github.png')} />

@@ -11,9 +11,9 @@ import SkipView from "@/components/skips/SkipView";
 export default function Skip2Screen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     return (
         <_skipLayout>
-            <SkipImage source={require('@/assets/images/skip2.png')} alt="Skip 2" />
+            <SkipImage source={require('@/assets/images/skip2.png')} alt="Skip 2" testID="skip-image"/>
             <SkipView>
-            <SkipText text={translations.skips.skip2Text} />
+            <SkipText text={translations.skips.skip2Text}  />
             <SkipButton
                 navigation={navigation}
                 targetScreen="skip3"

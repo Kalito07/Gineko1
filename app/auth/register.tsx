@@ -10,53 +10,74 @@ import SocialButtonsContainer from "@/components/auth/SocialButtonsContainer";
 import AuthTitle from "@/components/auth/AuthTitle";
 import Or from "@/components/auth/Or";
 import AuthLayout from "@/layouts/_authLayout";
+import Message from "@/components/Message";
 
 export default function RegisterScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [userType, setUserType] = useState('patient');
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleRegister = () => {
-        // if (email && password && confirmPassword && password === confirmPassword) {
-        //     console.log('New user registered');
-        //     console.log('User Type:', userType);
+        if (!email || !password || !confirmPassword) {
+            setErrorMessage('Please fill in all fields.');
+            setIsModalVisible(true);
+            return;
+        }
+        if (password !== confirmPassword) {
+            setIsModalVisible(true);
+            setPassword('');
+            setConfirmPassword('');
+            return;
+        }
         navigation.navigate('tabNavigation');
-        // } else {
-        //     console.log('Please fill in all fields correctly or ensure passwords match');
-        // }
+    };
+
+    const closeModal = () => {
+        setIsModalVisible(false);
+        setErrorMessage('');
     };
 
     return (
         <AuthLayout>
             <Logo />
             <AuthTitle text={translations.auth.registerTitle} />
-                <InputField
-                    label={translations.auth.email}
-                    placeholder="example@example.com"
-                    value={email}
-                    onChangeText={setEmail}
-                    keyboardType="email-address"
-                />
-                <InputField
-                    label={translations.auth.password}
-                    placeholder="********"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                />
-                <InputField
-                    label={translations.auth.confirmPassword}
-                    placeholder="********"
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                    secureTextEntry
-                />
+
+            <InputField
+                label={translations.auth.email}
+                placeholder="example@example.com"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+            />
+
+            <InputField
+                label={translations.auth.password}
+                placeholder="********"
+                testID="password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+            />
+
+            <InputField
+                label={translations.auth.confirmPassword}
+                placeholder="********"
+                testID="confirmPassword"
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                secureTextEntry
+            />
+
             <SubmitButton title={translations.auth.signUp} onPress={handleRegister} />
             <Or text={translations.auth.orRegister} />
-            <View style={{marginBottom: 24}}>
-            <SocialButtonsContainer />
+
+            <View style={{ marginBottom: 24 }}>
+                <SocialButtonsContainer />
             </View>
+
+            <Message visible={isModalVisible} onClose={closeModal} label={errorMessage || translations.termin.errorMessagePasswords} />
         </AuthLayout>
     );
 }

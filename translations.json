@@ -44,7 +44,8 @@
     "profilactica": "Женска консултация (Профилактичен преглед)",
     "gynecologyTermin": "Гинекологичен преглед",
     "unpregnantTermin": "Час за небременни",
-    "profilactica2": "Профилактичен преглед"
+    "profilactica2": "Профилактичен преглед",
+    "errorMessagePasswords": "Паролите не са еднакви!"
   },
   "pregnant": {
     "fever": "треска",

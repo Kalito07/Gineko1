@@ -16,7 +16,7 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
     const [password, setPassword] = useState('');
 
     const handleLogin = () => {
-        if (email && password) {
+        if (email.trim() && password.trim()) {
             console.log('User logged in');
             navigation.navigate('termins');
         } else {

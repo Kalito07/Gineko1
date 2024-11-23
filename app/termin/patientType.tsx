@@ -11,7 +11,7 @@ import Message from "@/components/Message";
 
 export default function PatientTypeScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [pregnant, setPregnant] = useState<string | null>(null);
-    const [modalVisible, setModalVisible] = useState<boolean>(false);  // State for custom modal visibility
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
 
     const handleOptionChange = (value: string) => {
         setPregnant(value);
@@ -43,7 +43,7 @@ export default function PatientTypeScreen({ navigation }: { navigation: Navigati
             </View>
 
             <SubmitButton onPress={continueAppointment} title={translations.termin.save} />
-<Message  visible={modalVisible} onClose={setModalVisible} message={translations.termin.errorMessage} />
+<Message  visible={modalVisible} onClose={setModalVisible} label={translations.termin.errorMessage} />
 
         </AuthLayout>
     );

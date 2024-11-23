@@ -1,15 +1,16 @@
 import { FlatList, View } from 'react-native';
 import React from 'react';
+import {useThemeColor} from "@/components/Themed";
 
 export default function AuthLayout({ children, style }: any) {
     const content = Array.isArray(children) ? children : [children];
-
+    const backgroundColor = useThemeColor({}, 'background');
     return (
         <View
             style={[
                 {
                     flex: 1,
-                    backgroundColor: '#fff6f9',
+                    backgroundColor: backgroundColor,
                     paddingHorizontal: 20,
                     paddingVertical: 30,
                 },

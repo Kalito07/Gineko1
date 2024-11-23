@@ -1,9 +1,9 @@
 import React from 'react';
-import { Modal, Text, View } from 'react-native';
+import {Modal, Text, View} from 'react-native';
 import SubmitButton from '@/components/auth/SubmitButton';
 import translations from "./../translations.json";
 
-export default function Message({ visible, onClose }:any) {
+export default function Message({ visible, onClose, label }:any) {
     return (
         <Modal
             transparent={true}
@@ -29,7 +29,7 @@ export default function Message({ visible, onClose }:any) {
                         fontWeight: 'bold',
                         textAlign: 'center',
                         marginBottom: 15,
-                        color: '#590d22'}}>{translations.termin.errorMessage}</Text>
+                        color: '#590d22'}}>{label}</Text>
                     <SubmitButton onPress={onClose} title={translations.termin.ok} />
                 </View>
             </View>

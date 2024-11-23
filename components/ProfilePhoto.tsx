@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, Text } from 'react-native';
+import {useThemeColor} from "@/components/Themed";
 
 export default function ProfilePhoto({ navigation }: any) {
+    const primary = useThemeColor({},'primary');
     const handleProfilePhoto = () => {
         navigation.navigate('profile');
     };
@@ -14,12 +16,12 @@ export default function ProfilePhoto({ navigation }: any) {
             right: 0}}>
             <Text style={{fontSize: 16,
                 fontWeight: 'bold',
-                color: '#590d22',
+                color: primary,
                 marginRight: 10}}>John Doe</Text>
             <TouchableOpacity style={{borderRadius: 30,
                 marginLeft:4,
                 overflow: 'hidden',
-                borderColor: '#590d22',shadowOffset: { width: 0, height: 4 },
+                borderColor: primary,shadowOffset: { width: 0, height: 4 },
                 shadowOpacity: 0.3,
                 shadowRadius: 6,
                 elevation: 5,

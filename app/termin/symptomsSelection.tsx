@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import {View, Text, useColorScheme} from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/lib/navigationTypes';
@@ -13,6 +13,10 @@ type Symptoms = {
 };
 
 export default function SymptomsSelectionScreen({ navigation, route }: { navigation: NavigationProp<RootStackParamList>; route: RouteProp<RootStackParamList, 'symptoms'>; }) {
+    const theme = useColorScheme();
+    const textColor = theme === 'dark' ? 'white' : '#978386';
+    const backgroundColor = theme === 'dark' ? '#272727' : '#ffe0e5';
+
     const [pregnant, setPregnant] = useState<boolean>(route.params?.isPregnant ?? true);
     const symptomsList = pregnant ? translations.pregnant : translations.unpregnant;
 
@@ -54,7 +58,7 @@ export default function SymptomsSelectionScreen({ navigation, route }: { navigat
                 paddingTop: 12,
                 paddingBottom: 9,
                 paddingHorizontal: 16,
-                backgroundColor: '#ffe0e5',
+                backgroundColor: backgroundColor,
                 borderRadius: 24,
                 shadowOffset: { width: 0, height: 4 },
                 shadowOpacity: 0.3,
@@ -70,7 +74,7 @@ export default function SymptomsSelectionScreen({ navigation, route }: { navigat
                                 onPress={() => handleSymptomChange(symptom as keyof Symptoms)}
                                 color="#590d22"
                             />
-                            <Text style={{ fontSize: 16, marginLeft: 2, color: '#978386' }}>{symptomsList[symptom]}</Text>
+                            <Text style={{ fontSize: 16, marginLeft: 2, color:textColor }}>{symptomsList[symptom]}</Text>
                         </View>
                     );
                 })}
@@ -80,6 +84,7 @@ export default function SymptomsSelectionScreen({ navigation, route }: { navigat
             <Message
                 visible={modalVisible}
                 onClose={() => setModalVisible(false)}
+                label={translations.termin.errorMessage}
             />
         </AuthLayout>
     );

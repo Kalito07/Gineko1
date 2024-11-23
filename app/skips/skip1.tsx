@@ -7,14 +7,10 @@ import translations from './../../translations.json';
 import { SkipButton } from "@/components/skips/SkipButton";
 import _skipLayout from "@/layouts/_skipLayout";
 import SkipView from "@/components/skips/SkipView";
-
 export default function Skip1Screen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     return (
         <_skipLayout>
-                <SkipImage
-                    source={require('@/assets/images/skip1.png')}
-                    alt="Skip 1"
-                />
+                <SkipImage source={require('@/assets/images/skip1.png')} alt="Skip 1" testID="skip-image"/>
                 <SkipView>
                     <SkipText text={translations.skips.skip1Text} />
                     <SkipButton navigation={navigation} targetScreen="skip2" />

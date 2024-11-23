@@ -1,9 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, useColorScheme } from 'react-native';
 import SubmitButton from "@/components/auth/SubmitButton";
 import translations from "./../translations.json";
 
 export function AppointmentCard({ appointment, onDelete }: any) {
+    const theme = useColorScheme();
+    const textColor = theme === 'dark' ? 'white' : '#978386';
+    const backgroundColor = theme === 'dark' ? '#272727' : '#ffe0e5';
+
     return (
         <View style={{
             flexDirection: 'row',
@@ -11,7 +15,7 @@ export function AppointmentCard({ appointment, onDelete }: any) {
             alignItems: 'center',
             paddingVertical: 12,
             paddingHorizontal: 16,
-            backgroundColor: '#ffe0e5',
+            backgroundColor: backgroundColor,
             borderRadius: 24,
             marginBottom: 16,
             shadowOffset: { width: 0, height: 4 },
@@ -24,14 +28,14 @@ export function AppointmentCard({ appointment, onDelete }: any) {
                 <Text style={{
                     fontSize: 16,
                     fontWeight: '500',
-                    color: '#978386',
+                    color: textColor,
                 }}>
                     {appointment.toLocaleDateString('bg-BG')}
                 </Text>
                 <Text style={{
                     fontSize: 16,
                     fontWeight: '500',
-                    color: '#978386',
+                    color: textColor,
                 }}>
                     {appointment.toLocaleTimeString('bg-BG', { hour: '2-digit', minute: '2-digit' })}
                 </Text>

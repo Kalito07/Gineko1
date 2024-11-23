@@ -1,7 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, Text, View} from 'react-native';
+import {TouchableOpacity, Text, View, useColorScheme} from 'react-native';
 
 export default function RadioButtonComponent({ selected, onPress, label }: any) {
+    const theme = useColorScheme();
+    const primary = theme === 'dark' ? 'white' : '#978386';
+
     return (
         <TouchableOpacity
             style={{flexDirection: 'row',
@@ -16,13 +19,13 @@ export default function RadioButtonComponent({ selected, onPress, label }: any) 
                 width: 24,
                 borderRadius: 12,
                 borderWidth: 1,
-                borderColor: '#978386',
+                borderColor: primary,
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginRight: 12}, selected && {backgroundColor: '#c9184a',
                 borderColor: '#c9184a'}]} />
             <Text style={{fontSize: 16,
-                color: '#978386'}}>{label}</Text>
+                color: primary}}>{label}</Text>
         </TouchableOpacity>
     );
 }

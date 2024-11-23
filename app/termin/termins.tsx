@@ -42,6 +42,7 @@ export default function TerminsScreen({ navigation }: { navigation: NavigationPr
             <SubmitButton
                 onPress={() => navigation.navigate('patientType')}
                 title={translations.termin.terminSubmin}
+
             />
         </AuthLayout>
     );

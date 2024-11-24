@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextInput, View, Text, useColorScheme } from 'react-native';
 import { useThemeColor } from "@/components/Themed";
 
-export default function InputField({label, placeholder, value, onChangeText, secureTextEntry = false, ...rest}: any) {
+export default function InputField({
+                                       label,
+                                       placeholder,
+                                       value,
+                                       onChangeText,
+                                       secureTextEntry = false,
+                                       ...rest
+                                   }: any) {
     const primaryColor = useThemeColor({}, 'primary');
     const secondaryColor = useThemeColor({}, 'secondary');
     const theme = useColorScheme();
+    const [isFocused, setIsFocused] = useState(false);
 
     return (
         <View style={{ marginVertical: 7 }}>
@@ -22,6 +30,8 @@ export default function InputField({label, placeholder, value, onChangeText, sec
                     elevation: 5,
                     borderRadius: 30,
                     overflow: 'hidden',
+                    borderWidth: 2,
+                    borderColor: isFocused ? "#c9184a" : 'transparent',
                     backgroundColor: secondaryColor,
                 }}
             >
@@ -36,7 +46,9 @@ export default function InputField({label, placeholder, value, onChangeText, sec
                     value={value}
                     onChangeText={onChangeText}
                     secureTextEntry={secureTextEntry}
-                    placeholderTextColor={theme === 'dark' ? "#978386" : "black"}
+                    placeholderTextColor={theme === 'dark' ? "#978386" : "#999"}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
                     {...rest}
                 />
             </View>

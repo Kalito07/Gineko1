@@ -14,10 +14,12 @@ export default function ProfilePhoto({ navigation }: any) {
             position: 'absolute',
             top: 0,
             right: 0}}>
+            <TouchableOpacity onPress={handleProfilePhoto}>
             <Text style={{fontSize: 16,
                 fontWeight: 'bold',
                 color: primary,
                 marginRight: 10}}>John Doe</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={{borderRadius: 30,
                 marginLeft:4,
                 overflow: 'hidden',

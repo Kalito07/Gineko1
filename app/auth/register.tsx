@@ -17,26 +17,26 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState(true);
 
     const handleRegister = () => {
         if (!email || !password || !confirmPassword) {
-            setErrorMessage('Please fill in all fields.');
+            setErrorMessage(false);
             setIsModalVisible(true);
             return;
         }
         if (password !== confirmPassword) {
+            setErrorMessage(true);
             setIsModalVisible(true);
             setPassword('');
             setConfirmPassword('');
-            return;
+            return;//TODO: ALERT
         }
         navigation.navigate('tabNavigation');
     };
 
     const closeModal = () => {
         setIsModalVisible(false);
-        setErrorMessage('');
     };
 
     return (
@@ -55,7 +55,6 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
             <InputField
                 label={translations.auth.password}
                 placeholder="********"
-                testID="password"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
@@ -64,7 +63,6 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
             <InputField
                 label={translations.auth.confirmPassword}
                 placeholder="********"
-                testID="confirmPassword"
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 secureTextEntry
@@ -77,7 +75,13 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
                 <SocialButtonsContainer />
             </View>
 
-            <Message visible={isModalVisible} onClose={closeModal} label={translations.termin.fill || translations.termin.errorMessagePasswords} />
+            <Message
+                visible={isModalVisible}
+                onClose={closeModal}
+                label={errorMessage
+                    ? translations.termin.errorMessagePasswords
+                    : translations.termin.fill}
+            />
         </AuthLayout>
     );
 }

@@ -45,7 +45,9 @@
     "gynecologyTermin": "Гинекологичен преглед",
     "unpregnantTermin": "Час за небременни",
     "profilactica2": "Профилактичен преглед",
-    "errorMessagePasswords": "Паролите не са еднакви!"
+    "errorMessagePasswords": "Паролите не са еднакви!",
+    "logOut": "Сигурни ли се, че искате да излезете?",
+    "fill": "Попълните всички полета!"
   },
   "pregnant": {
     "fever": "треска",

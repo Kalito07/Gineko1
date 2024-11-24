@@ -11,7 +11,8 @@
       "image": "./assets/images/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#fff6f9"
-    },
+    }
+  ,
     "ios": {
       "supportsTablet": true
     },

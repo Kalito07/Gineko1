@@ -26,7 +26,7 @@ describe('RegisterScreen', () => {
     });
 
 
-    it('shows password mismatch error', async () => {
+    it('password mismatch error', async () => {
         const { getByPlaceholderText, getByText } = render(
             <RegisterScreen navigation={mockNavigation} />
         );

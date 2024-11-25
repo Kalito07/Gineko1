@@ -134,8 +134,8 @@ function TabNavigator({ navigation }: { navigation: NavigationProp<RootStackPara
                     component={() => null}
                     listeners={({ navigation }) => ({
                         tabPress: (e) => {
-                            e.preventDefault(); // Блокирай стандартното действие
-                            setLogoutModalVisible(true); // Покажи съобщението
+                            e.preventDefault();
+                            setLogoutModalVisible(true);
                         },
                     })}
                 />

@@ -11,6 +11,7 @@ import AuthTitle from "@/components/auth/AuthTitle";
 import Or from "@/components/auth/Or";
 import AuthLayout from "@/layouts/_authLayout";
 import Message from "@/components/Message";
+import axios from "axios";
 
 export default function RegisterScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
     const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState(true);
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
         if (!email || !password || !confirmPassword) {
             setErrorMessage(false);
             setIsModalVisible(true);
@@ -30,10 +31,26 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
             setIsModalVisible(true);
             setPassword('');
             setConfirmPassword('');
-            return;//TODO: ALERT
+            return;
         }
-        navigation.navigate('tabNavigation');
+
+        try {
+            const response = await axios.post("http://localhost:3001/api/register", {
+                email,
+                password,
+                confirmPassword,
+            });
+console.log(response);
+            if (response.status === 200) {
+                navigation.navigate("tabNavigation");
+            } else {
+                console.log(response.data.message);
+            }
+        } catch (error) {
+
+        }
     };
+
 
     const closeModal = () => {
         setIsModalVisible(false);

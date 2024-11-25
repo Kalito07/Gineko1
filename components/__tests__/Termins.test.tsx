@@ -34,7 +34,7 @@ describe('TerminsScreen', () => {
         expect(getByText('16.09.2024 г.')).toBeTruthy();
     });
 
-    it('navigate to the "patientType" screen on', async () => {
+    it('navigate to the "patientType"', async () => {
         const { getByText } = render(<TerminsScreen navigation={mockNavigation} />);
         fireEvent.press(getByText('Запазете час'));
         await waitFor(() => {

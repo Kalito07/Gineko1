@@ -15,14 +15,27 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        if (email.trim() && password.trim()) {
-            console.log('User logged in');
-            navigation.navigate('termins');
-        } else {
-            console.log('Please enter valid credentials');
+    const handleLogin = async () => {
+        try {
+            const response = await fetch("http://192.168.56.1:3001/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            if (response.ok) {
+                navigation.navigate("termins");
+            } else {
+                const data = await response.json();
+                console.log(data.message);
+            }
+        } catch (error) {
+            console.error("Error:", error);
         }
     };
+
 
     return (
         <AuthLayout>

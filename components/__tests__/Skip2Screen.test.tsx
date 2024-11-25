@@ -19,17 +19,17 @@ describe('Skip2Screen', () => {
         getByText = rendered.getByText;
     });
 
-    it('renders the image correctly', () => {
+    it('image correct', () => {
         const image = getByTestId('skip-image');
         expect(image).toBeTruthy();
     });
 
-    it('displays the correct skip text', () => {
+    it('correct skip text', () => {
         const skipText = getByText(translations.skips.skip2Text);
         expect(skipText).toBeTruthy();
     });
 
-    it('navigates to the next screen on button press', () => {
+    it('navigates to the next screen', () => {
         const skipButton = getByTestId('skip-button');
         fireEvent.press(skipButton);
 

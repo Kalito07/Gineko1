@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from "@/lib/navigationTypes";
 import Logo from "@/components/auth/Logo";
@@ -10,50 +10,65 @@ import SocialButtonsContainer from "@/components/auth/SocialButtonsContainer";
 import AuthTitle from "@/components/auth/AuthTitle";
 import Or from "@/components/auth/Or";
 import AuthLayout from "@/layouts/_authLayout";
-import Message from "@/components/Message";
-import axios from "axios";
+import { useRouter } from "expo-router";
+import { useSignUp } from '@clerk/clerk-expo';
 
 export default function RegisterScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(true);
+    const { isLoaded, signUp, setActive } = useSignUp();
+    const router = useRouter();
 
-    const handleRegister = async () => {
-        if (!email || !password || !confirmPassword) {
-            setErrorMessage(false);
-            setIsModalVisible(true);
-            return;
-        }
-        if (password !== confirmPassword) {
-            setErrorMessage(true);
-            setIsModalVisible(true);
-            setPassword('');
-            setConfirmPassword('');
+    const [emailAddress, setEmailAddress] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [pendingVerification, setPendingVerification] = React.useState(false);
+    const [code, setCode] = React.useState('');
+    const [errorMessages, setErrorMessages] = React.useState<string[]>([]);
+
+    const onSignUpPress = async () => {
+        if (!isLoaded) {
             return;
         }
 
         try {
-            const response = await axios.post("http://localhost:3000/api/register", {
-                email,
+            await signUp.create({
+                emailAddress,
                 password,
-                confirmPassword,
             });
-console.log(response);
-            if (response.status === 200) {
-                navigation.navigate("tabNavigation");
-            } else {
-                console.log(response.data.message);
-            }
-        } catch (error) {
 
+            await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
+            setPendingVerification(true);
+            setErrorMessages([]); // Clear errors if successful
+        } catch (err: any) {
+            console.error(JSON.stringify(err, null, 2));
+            if (err.errors) {
+                const messages = err.errors.map((error: any) => error.message);
+                setErrorMessages(messages);
+            } else {
+                setErrorMessages(["An unexpected error occurred. Please try again."]);
+            }
         }
     };
 
+    const onPressVerify = async () => {
+        if (!isLoaded) {
+            return;
+        }
 
-    const closeModal = () => {
-        setIsModalVisible(false);
+        try {
+            const completeSignUp = await signUp.attemptEmailAddressVerification({
+                code,
+            });
+
+            if (completeSignUp.status === 'complete') {
+                await setActive({ session: completeSignUp.createdSessionId });
+                navigation.navigate("termin")
+            } else {
+                console.error(JSON.stringify(completeSignUp, null, 2));
+                setErrorMessages(["Verification failed. Please check the code and try again."]);
+            }
+        } catch (err: any) {
+            console.error(JSON.stringify(err, null, 2));
+            setErrorMessages(["An error occurred during verification. Please try again."]);
+        }
     };
 
     return (
@@ -61,44 +76,67 @@ console.log(response);
             <Logo />
             <AuthTitle text={translations.auth.registerTitle} />
 
-            <InputField
-                label={translations.auth.email}
-                placeholder="example@example.com"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-            />
+            {!pendingVerification ? (
+                <>
+                    <InputField
+                        label={translations.auth.email}
+                        placeholder="example@example.com"
+                        value={emailAddress}
+                        onChangeText={setEmailAddress}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                    />
 
-            <InputField
-                label={translations.auth.password}
-                placeholder="********"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
+                    <InputField
+                        label={translations.auth.password}
+                        placeholder="********"
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                    />
 
-            <InputField
-                label={translations.auth.confirmPassword}
-                placeholder="********"
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                secureTextEntry
-            />
+                    {errorMessages.map((msg, index) => (
+                        <Text key={index} style={styles.errorText}>{msg}</Text>
+                    ))}
 
-            <SubmitButton title={translations.auth.signUp} onPress={handleRegister} />
-            <Or text={translations.auth.orRegister} />
+                    <SubmitButton title={translations.auth.signUp} onPress={onSignUpPress} />
+                    <Or text={translations.auth.orRegister} />
 
-            <View style={{ marginBottom: 24 }}>
-                <SocialButtonsContainer />
-            </View>
+                    <View style={{ marginBottom: 24 }}>
+                        <SocialButtonsContainer />
+                    </View>
+                </>
+            ) : (
+                <>
+                    <TextInput
+                        value={code}
+                        placeholder="Enter verification code"
+                        onChangeText={setCode}
+                        style={styles.input}
+                    />
 
-            <Message
-                visible={isModalVisible}
-                onClose={closeModal}
-                label={errorMessage
-                    ? translations.termin.errorMessagePasswords
-                    : translations.termin.fill}
-            />
+                    {errorMessages.map((msg, index) => (
+                        <Text key={index} style={styles.errorText}>{msg}</Text>
+                    ))}
+
+                    <Button title="Verify Email" onPress={onPressVerify} />
+                </>
+            )}
         </AuthLayout>
     );
 }
+
+const styles = StyleSheet.create({
+    errorText: {
+        color: '',
+        marginVertical: 5,
+        textAlign: 'center',
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 10,
+        marginBottom: 10,
+        borderRadius: 5,
+    },
+});

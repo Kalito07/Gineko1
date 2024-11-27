@@ -17,13 +17,23 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
 
     const handleLogin = async () => {
         try {
-            const response = await fetch("http://192.168.56.1:3001/api/login", {
+            const response = await fetch("http://192.168.56.1:3000/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email, password }),
             });
+            try {
+                const response = await fetch('https://api.example.com/data');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error('Network request failed', error);
+            }
 
             if (response.ok) {
                 navigation.navigate("termins");

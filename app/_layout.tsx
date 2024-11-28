@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme } from "react-native";
 import {
@@ -13,7 +13,6 @@ import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 import * as SecureStore from "expo-secure-store";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import translations from "./../translations.json";
-
 import Skip1Screen from "@/app/skips/skip1";
 import Skip2Screen from "@/app/skips/skip2";
 import Skip3Screen from "@/app/skips/skip3";
@@ -27,12 +26,12 @@ import UnpregnantScreen from "@/app/termin/unpregnant";
 import TerminScreen from "@/app/termin/termin";
 import SymptomsSelectionScreen from "@/app/termin/symptomsSelection";
 import Message from "./../components/Message";
-
 import { RootStackParamList } from "@/lib/navigationTypes";
 import {useFonts} from "expo-font";
+import { useClerk } from '@clerk/clerk-expo';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
-
+const clerkFrontendApi = 'your-clerk-frontend-api';
 const tokenCache = {
   async getToken(key: string) {
     try {
@@ -86,7 +85,7 @@ export default function App() {
   }
 
   return (
-      <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+      <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey} frontendApi={clerkFrontendApi}>
         <ClerkLoaded>
           <NavigationIndependentTree>
           <NavigationContainer theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
@@ -114,14 +113,21 @@ export default function App() {
       </ClerkProvider>
   );
 }
-function TabNavigator({navigation}:{ navigation: NavigationProp<RootStackParamList>; }) {
+function TabNavigator({ navigation }: { navigation: NavigationProp<any> }) {
   const colorScheme = useColorScheme();
   const [isLogoutModalVisible, setLogoutModalVisible] = useState(false);
+  const { signOut } = useClerk(); // Get the signOut function from useClerk
 
-  const handleLogout = () => {
-    console.log("User logged out");
-    setLogoutModalVisible(false);
-    navigation.navigate("login");
+  const handleLogout = async () => {
+    try {
+      await signOut(); // Use signOut from Clerk
+      console.log("User successfully logged out");
+    } catch (error) {
+      console.error("Error logging out: ", error);
+    } finally {
+      setLogoutModalVisible(false);
+      navigation.navigate("login"); // Redirect to the login screen
+    }
   };
 
   return (
@@ -137,7 +143,14 @@ function TabNavigator({navigation}:{ navigation: NavigationProp<RootStackParamLi
                 } else if (route.name === "logout") {
                   iconName = focused ? "log-out" : "log-out-outline";
                 }
-                return <Ionicons name={iconName} size={size} color={color} style={{ alignSelf: "center" }} />;
+                return (
+                    <Ionicons
+                        name={iconName as string}
+                        size={size}
+                        color={color}
+                        style={{ alignSelf: "center" }}
+                    />
+                );
               },
               tabBarActiveTintColor: colorScheme === "dark" ? "#ffdae0" : "#590d22",
               tabBarStyle: {

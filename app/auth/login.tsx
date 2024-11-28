@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Button, TextInput, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from './../../lib/navigationTypes';
 import Logo from "@/components/auth/Logo";
@@ -11,17 +11,24 @@ import SubmitButton from "@/components/auth/SubmitButton";
 import Or from "@/components/auth/Or";
 import AuthLayout from "@/layouts/_authLayout";
 import { useSignIn } from '@clerk/clerk-expo';
-import { useRouter } from "expo-router";
+import { useAuth } from '@clerk/clerk-expo';
 
 export default function LoginScreen({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
-    const { signIn, setActive, isLoaded } = useSignIn();
-    const router = useRouter();
+    const { signIn, setActive, isLoaded } = useSignIn(); // Using signIn directly from useSignIn
+    const { isSignedIn, signOut } = useAuth();
 
     const [emailAddress, setEmailAddress] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [pendingVerification, setPendingVerification] = React.useState(false);
-    const [code, setCode] = React.useState('');
     const [errorMessages, setErrorMessages] = React.useState<string[]>([]);
+
+    useEffect(() => {
+        const handleSignOut = async () => {
+            if (isSignedIn) {
+                await signOut();
+            }
+        };
+        handleSignOut();
+    }, [isSignedIn, signOut]);
 
     const onSignInPress = React.useCallback(async () => {
         if (!isLoaded) {
@@ -29,23 +36,21 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
         }
 
         try {
+            // Use signIn.create for email/password sign-in
             const signInAttempt = await signIn.create({
                 identifier: emailAddress,
                 password,
             });
 
             if (signInAttempt.status === 'complete') {
+                // If successful, navigate to the tab navigation
                 await setActive({ session: signInAttempt.createdSessionId });
-                router.replace('/');
-            } else if (signInAttempt.status === 'needs_first_factor') {
-                setPendingVerification(true);
-                setErrorMessages([]);
+                navigation.navigate('tabNavigation');
             } else {
-                console.error(JSON.stringify(signInAttempt, null, 2));
                 setErrorMessages(["Unexpected error occurred. Please try again."]);
             }
         } catch (err: any) {
-            console.error(JSON.stringify(err, null, 2));
+            console.error(err);
             if (err.errors) {
                 const messages = err.errors.map((error: any) => error.message);
                 setErrorMessages(messages);
@@ -53,98 +58,41 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
                 setErrorMessages(["Invalid email or password."]);
             }
         }
-    }, [isLoaded, emailAddress, password]);
-
-    const onPressVerify = React.useCallback(async () => {
-        if (!isLoaded) {
-            return;
-        }
-
-        try {
-            const verificationAttempt = await signIn.attemptFirstFactor({
-                code,
-                strategy: 'email_code',
-            });
-
-            if (verificationAttempt.status === 'complete') {
-                await setActive({ session: verificationAttempt.createdSessionId });
-                router.replace('/');
-            } else {
-                console.error(JSON.stringify(verificationAttempt, null, 2));
-                setErrorMessages(["Invalid verification code."]);
-            }
-        } catch (err: any) {
-            console.error(JSON.stringify(err, null, 2));
-            setErrorMessages(["Error during verification. Please try again."]);
-        }
-    }, [isLoaded, code]);
+    }, [isLoaded, emailAddress, password, setActive, navigation]);
 
     return (
         <AuthLayout>
-            {!pendingVerification && (
-                <>
-                    <Logo />
-                    <AuthTitle text={translations.auth.loginTitle} />
-                    <InputField
-                        label={translations.auth.email}
-                        placeholder="example@example.com"
-                        value={emailAddress}
-                        onChangeText={setEmailAddress}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                    />
-                    <InputField
-                        label={translations.auth.password}
-                        placeholder="********"
-                        secureTextEntry
-                        value={password}
-                        onChangeText={setPassword}
-                    />
-                    {errorMessages.map((msg, index) => (
-                        <Text key={index} style={styles.errorText}>{msg}</Text>
-                    ))}
-                    <SubmitButton title={translations.auth.logIn} onPress={onSignInPress} />
-                    <Or text={translations.auth.orLogin} />
-                    <View
-                        style={{
-                            marginBottom: 100,
-                            flex: 1,
-                            justifyContent: 'center',
-                        }}
-                    >
-                        <SocialButtonsContainer />
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                marginTop: -10,
-                            }}
-                        >
-                            <Text style={{ color: '#978386' }}>
-                                {translations.auth.withoutAccount}{' '}
-                            </Text>
-                            <TouchableOpacity onPress={() => navigation.navigate('register')}>
-                                <Text style={{ color: '#c9184a' }}>{translations.auth.signUp}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </>
-            )}
-            {pendingVerification && (
-                <>
-                    <TextInput
-                        value={code}
-                        placeholder="Code..."
-                        onChangeText={setCode}
-                        style={{ borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 10 }}
-                    />
-                    {errorMessages.map((msg, index) => (
-                        <Text key={index} style={styles.errorText}>{msg}</Text>
-                    ))}
-                    <Button title="Verify Email" onPress={onPressVerify} />
-                </>
-            )}
+            <Logo />
+            <AuthTitle text={translations.auth.loginTitle} />
+            <InputField
+                label={translations.auth.email}
+                placeholder="example@example.com"
+                value={emailAddress}
+                onChangeText={setEmailAddress}
+                keyboardType="email-address"
+                autoCapitalize="none"
+            />
+            <InputField
+                label={translations.auth.password}
+                placeholder="********"
+                secureTextEntry
+                value={password}
+                onChangeText={setPassword}
+            />
+            {errorMessages.map((msg, index) => (
+                <Text key={index} style={styles.errorText}>{msg}</Text>
+            ))}
+            <SubmitButton title={translations.auth.logIn} onPress={onSignInPress} />
+            <Or text={translations.auth.orLogin} />
+            <View style={{ marginBottom: 100, flex: 1, justifyContent: 'center' }}>
+                <SocialButtonsContainer />
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: -10 }}>
+                    <Text style={{ color: '#978386' }}>{translations.auth.withoutAccount} </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('register')}>
+                        <Text style={{ color: '#c9184a' }}>{translations.auth.signUp}</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </AuthLayout>
     );
 }

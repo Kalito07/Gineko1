@@ -1,7 +1,7 @@
 import {Image, TouchableOpacity, useColorScheme} from 'react-native';
 import React from 'react';
 
-export default function SocialButton({ source }: any) {
+export default function SocialButton({ source, onPress }: any) {
     const theme = useColorScheme();
     const backgroundColor = theme === 'dark' ? '#272727' : 'white';
     return (
@@ -17,6 +17,7 @@ export default function SocialButton({ source }: any) {
                 alignItems: 'center',
                 elevation: 5,
             }}
+            onPress={onPress}
         >
             <Image source={source} style={{ height: 30, width: 30 }} />
         </TouchableOpacity>

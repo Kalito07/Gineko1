@@ -21,7 +21,9 @@
     "typeOfUser": "Какъв потребител сте?",
     "patient": "Пациент",
     "doctor": "Лекар",
-    "forgotPassword":"Забавена парола?"
+    "forgotPassword":"Забавена парола?",
+    "verify": "Верифицирайте имейла си",
+    "verifyEnter": "Въведете верификационен код"
   },
   "termin": {
     "terminsTitle": "Запазени часове",

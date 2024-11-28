@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from "@/lib/navigationTypes";
 import Logo from "@/components/auth/Logo";
@@ -60,7 +60,7 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
 
             if (completeSignUp.status === 'complete') {
                 await setActive({ session: completeSignUp.createdSessionId });
-                navigation.navigate("termin")
+                navigation.navigate('tabNavigation');
             } else {
                 console.error(JSON.stringify(completeSignUp, null, 2));
                 setErrorMessages(["Verification failed. Please check the code and try again."]);
@@ -71,13 +71,13 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
         }
     };
 
+
     return (
         <AuthLayout>
             <Logo />
-            <AuthTitle text={translations.auth.registerTitle} />
-
             {!pendingVerification ? (
                 <>
+            <AuthTitle text={translations.auth.registerTitle} />
                     <InputField
                         label={translations.auth.email}
                         placeholder="example@example.com"
@@ -103,23 +103,22 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
                     <Or text={translations.auth.orRegister} />
 
                     <View style={{ marginBottom: 24 }}>
-                        <SocialButtonsContainer />
+                         {/*<SocialButtonsContainer />*/}
                     </View>
                 </>
             ) : (
                 <>
-                    <TextInput
+                    <InputField
+                        label={translations.auth.verifyEnter}
                         value={code}
-                        placeholder="Enter verification code"
+                        placeholder="000000"
                         onChangeText={setCode}
-                        style={styles.input}
                     />
 
                     {errorMessages.map((msg, index) => (
                         <Text key={index} style={styles.errorText}>{msg}</Text>
                     ))}
-
-                    <Button title="Verify Email" onPress={onPressVerify} />
+<SubmitButton title={translations.auth.verify} onPress={onPressVerify} />
                 </>
             )}
         </AuthLayout>
@@ -128,7 +127,7 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
 
 const styles = StyleSheet.create({
     errorText: {
-        color: '',
+        color: 'red',
         marginVertical: 5,
         textAlign: 'center',
     },

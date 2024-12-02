@@ -7,19 +7,17 @@ import Title from "@/components/Title";
 import AuthLayout from "@/layouts/_authLayout";
 
 export default function ProfileScreen() {
-    const [profileImage, setProfileImage] = useState<string | null>(null);
+    const [profileImage, setProfileImage] = useState<any>(null);
     const [email] = useState('user@example.com');
     const [name, setName] = useState('');
 
-    const handleSelectImage = () => {
-        ImagePicker.launchImageLibrary({ mediaType: 'photo' }, (response) => {
-            if (response.assets && response.assets.length > 0 && response.assets[0].uri) {
-                setProfileImage(response.assets[0].uri);
-            } else {
-                console.warn('No image selected or invalid response.');
-            }
-        });
+    const handleSelectImage = async () => {
+        const result = await ImagePicker.launchImageLibrary({ mediaType: 'photo' });
+        if (result.assets && result.assets.length > 0) {
+            setProfileImage(result.assets[0].uri);
+        }
     };
+
 
 
     return (

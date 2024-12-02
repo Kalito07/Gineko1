@@ -8,25 +8,23 @@ export default function SocialButtonsContainer() {
  const { signIn } = useSignIn();
  const navigation = useNavigation();
 
- const handleSignIn = async (provider: "oauth_google" | "oauth_facebook" | "oauth_github") => {
+ const handleSignIn = async (provider: "oauth_google" | "oauth_facebook" | "oauth_github", action: "signIn" | "signUp") => {
   try {
-   if (!signIn) {
-    Alert.alert("Грешка", "Функцията за вход не е налична.");
+   const method = action === "signIn" ? signIn : signUp; // Adjust for sign-in or sign-up.
+   if (!method) {
+    Alert.alert("Грешка", `Функцията за ${action === "signIn" ? "вход" : "регистрация"} не е налична.`);
     return;
    }
 
-   const signInResponse = await signIn.create({
+   const response = await method.create({
     strategy: provider,
     redirectUrl: "https://perfect-hermit-17.clerk.accounts.dev/v1/oauth_callback",
    });
 
-   const redirectUrl = signInResponse.firstFactorVerification?.externalVerificationRedirectURL;
-
+   const redirectUrl = response.firstFactorVerification?.externalVerificationRedirectURL;
    if (redirectUrl) {
     const decodedUrl = decodeURIComponent(redirectUrl);
     Linking.openURL(decodedUrl);
-
-    navigation.navigate('tabNavigation');
    } else {
     Alert.alert("Грешка", "Не беше намерен адрес за пренасочване към провайдъра.");
    }
@@ -37,19 +35,20 @@ export default function SocialButtonsContainer() {
   }
  };
 
+
  return (
      <View style={styles.container}>
       <SocialButton
           source={require("@/assets/images/google.png")}
-          onPress={() => handleSignIn("oauth_google")}
+          onPress={() => handleSignIn("oauth_google","signUp")}
       />
       <SocialButton
           source={require("@/assets/images/facebook.png")}
-          onPress={() => handleSignIn("oauth_facebook")}
+          onPress={() => handleSignIn("oauth_facebook","signUp")}
       />
       <SocialButton
           source={require("@/assets/images/github.png")}
-          onPress={() => handleSignIn("oauth_github")}
+          onPress={() => handleSignIn("oauth_github","signUp")}
       />
      </View>
  );

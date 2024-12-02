@@ -83,9 +83,8 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-
   return (
-      <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey} frontendApi={clerkFrontendApi}>
+      <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
         <ClerkLoaded>
           <NavigationIndependentTree>
           <NavigationContainer theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
